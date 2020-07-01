@@ -323,11 +323,12 @@ export default {
       return false;
     },
     getProfilePhoto() {
+      if(this.form.photo!=null){
       let pPhoto =
         this.form.photo.length > 100
           ? this.form.photo
           : "img/profile/" + this.form.photo;
-      return pPhoto;
+      return pPhoto;}
     },
     updateInfo() {
       this.$Progress.start();

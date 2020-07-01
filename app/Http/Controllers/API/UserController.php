@@ -23,6 +23,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+
     }
 
 
@@ -33,9 +34,10 @@ class UserController extends Controller
      */
     public function index()
     {
-       //$result =User::latest()->paginate(20);
-        $users = DB::table('users')->select('*')
-        ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')->leftJoin('students_profiles', 'users.id', '=', 'students_profiles.user_id')
+       //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
+        $users = DB::table('users')->select('users.*', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
+        ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
+        ->leftJoin('students_profiles', 'users.id', '=', 'students_profiles.user_id')
         ->get();
 
     return response()->json([
@@ -80,12 +82,11 @@ class UserController extends Controller
     }
     public function studentprofile()
     {
-        //return auth('api')->user();
+     $id= auth('api')->user()->id;
         // $users1=Auth::user();
         //$id=Auth::user()->id;
         // $user = DB::table('students_profiles')->get();
-        $id = Auth::user()->id;
-
+        //$id = Auth::user()->id;
         //$user = User::findOrFail($id);
         $users = DB::table('users')->select('name', 'email', 'type', 'fathername', 'user_id', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','isapproved')
             ->leftJoin('students_profiles', 'users.id', '=', 'students_profiles.user_id')
@@ -97,8 +98,7 @@ class UserController extends Controller
     public function teacherprofile()
     {
        
-        $id = Auth::user()->id;
-
+        $id= auth('api')->user()->id;
         //$user = User::findOrFail($id);
         $users = DB::table('users')->select('name', 'email', 'type', 'user_id', 'designation', 'contact', 'photo','isapproved')
             ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
@@ -184,6 +184,32 @@ class UserController extends Controller
        
         ];
         }
+          //Checking for Password
+          if (!empty($request->password)) {
+            $pass = Hash::make($request['password']);
+            $request->merge(['password' => $pass]);
+            $updateDetails1 = [
+                'name' => $request->name,
+                'email' => $request->get('email'),
+                'password' => $request->get('password')
+            ];
+        } else {
+            $updateDetails1 = [
+                'name' => $request->name,
+                'email' => $request->get('email'),
+            ];
+        }
+
+
+        //Update Data
+        DB::transaction(function () use ($id,  $updateDetails2, $updateDetails1) {
+            DB::table('users')
+                ->where('id', $id)
+                ->update($updateDetails1);
+            DB::table('students_profiles')
+                ->where('user_id', $id)
+                ->update($updateDetails2);
+        });
     }
 
 
@@ -316,8 +342,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        
+        //DB::table('users')->where('email', '=', 100)->delete();
         $user = User::findOrFail($id);
-        //Delete the User
+   // Delete the User
         $user->delete();
         return ['message' => 'User Deleted'];
     }

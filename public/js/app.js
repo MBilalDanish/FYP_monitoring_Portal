@@ -2487,8 +2487,10 @@ __webpack_require__.r(__webpack_exports__);
       return false;
     },
     getProfilePhoto: function getProfilePhoto() {
-      var pPhoto = this.form.photo.length > 100 ? this.form.photo : "img/profile/" + this.form.photo;
-      return pPhoto;
+      if (this.form.photo != null) {
+        var pPhoto = this.form.photo.length > 100 ? this.form.photo : "img/profile/" + this.form.photo;
+        return pPhoto;
+      }
     },
     updateInfo: function updateInfo() {
       var _this = this;
