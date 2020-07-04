@@ -125,6 +125,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <p>Profile</p>
               </router-link >
           </li>
+          <li class="nav-item">
+            <router-link to='/documentsmanage' class="nav-link">
+                <i class="fas fa-clock nav-icon orange"></i>
+                <p>Manage Documents</p>
+              </router-link >
+          </li>
           @endcan
           @cannot('isStudent')
           <li class="nav-item">

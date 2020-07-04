@@ -33,7 +33,7 @@
                   <td v-if="teacher.type=='external'" >External Examiner</td>
                   <td v-else>{{teacher.type |capitalize}}</td>
                   <td>
-                    <img :src="getProfilePhoto(teacher.photo)" alt="User Image" />
+                    <img :src="getProfilePhoto(teacher.photo)"  class="pic"   alt="User Image" />
                   </td>
                   <td>
                     <a href="#" @click="editModal(teacher)">
@@ -72,7 +72,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form @submit.prevent="editmode ? updateTeachers():createTeacher()">
+          <form @submit.prevent="editmode ? updateTeachers():createTeacher()" >
             <div class="modal-body">
               <!--input -->
               <div class="form-group">

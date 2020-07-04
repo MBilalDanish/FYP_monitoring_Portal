@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\API;
-use Response;
+
+
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -23,7 +23,6 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
-
     }
 
 
@@ -34,17 +33,16 @@ class UserController extends Controller
      */
     public function index()
     {
-       //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
-        $users = DB::table('users')->select('users.*', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
-        ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
-        ->leftJoin('students_profiles', 'users.id', '=', 'students_profiles.user_id')
-        ->get();
+        $this->authorize('isAdmin');
+        //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
+        $users = DB::table('users')->select('users.id', 'users.name', 'users.type', 'users.email', 'users.isapproved', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo as pic', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
+            ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
+            ->leftJoin('students_profiles', 'users.id', '=', 'students_profiles.user_id')
+            ->get();
 
-    return response()->json([
-        'data' => $users,
-    ]);
-   
-        
+        return response()->json([
+            'data' => $users,
+        ]);
     }
 
     /**
@@ -55,6 +53,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('isAdmin');
         $this->validate($request, [
             'name' => 'required|string|max:200',
             'type' => 'required|string|max:200',
@@ -82,40 +81,41 @@ class UserController extends Controller
     }
     public function studentprofile()
     {
-     $id= auth('api')->user()->id;
+        $this->authorize('isStudent');
+        $id = auth('api')->user()->id;
         // $users1=Auth::user();
         //$id=Auth::user()->id;
         // $user = DB::table('students_profiles')->get();
         //$id = Auth::user()->id;
         //$user = User::findOrFail($id);
-        $users = DB::table('users')->select('name', 'email', 'type', 'fathername', 'user_id', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','isapproved')
+        $users = DB::table('users')->select('name', 'email', 'type', 'fathername', 'user_id', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo', 'isapproved')
             ->leftJoin('students_profiles', 'users.id', '=', 'students_profiles.user_id')
             ->where('users.id', '=',  $id)
             ->get();
-            $users[0]->id=$id;
+        $users[0]->id = $id;
         return $users;
     }
     public function teacherprofile()
     {
-       
-        $id= auth('api')->user()->id;
+        $this->authorize('isTeacher');
+        $id = auth('api')->user()->id;
         //$user = User::findOrFail($id);
-        $users = DB::table('users')->select('name', 'email', 'type', 'user_id', 'designation', 'contact', 'photo','isapproved')
+        $users = DB::table('users')->select('name', 'email', 'type', 'user_id', 'designation', 'contact', 'photo', 'isapproved')
             ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
             ->where('users.id', '=',  $id)
             ->get();
-            $users[0]->id=$id;
+        $users[0]->id = $id;
         return $users;
     }
 
 
     public function updatestudentProfile(Request $request)
-    {
-       
+    {$this->authorize('isStudent');
+        $this->authorize('isStudent');
         //Get Information
         $user = auth('api')->user();
         $id = $user->id;
-       
+
         //Validate Request
         $this->validate($request, [
             'name' => 'required|string|max:200',
@@ -129,39 +129,39 @@ class UserController extends Controller
             'password' => 'sometimes|string|min:8',
         ]);
         $result =  DB::table('students_profiles')
-        ->select('*')->where('user_id', '=', $id)
-        ->first();
-     
-        if($result==null){
+            ->select('*')->where('user_id', '=', $id)
+            ->first();
+
+        if ($result == null) {
             DB::table('students_profiles')->insert([
-            'user_id'=>$id, 
-            'rollno' => 'rollno',
-            'program' => 'mcs',
-            'semester' => 3,
-            'fathername' => 'fathername',
-            'supervisor' => 'supervisor',
-            'cgpa' => 3.00,
-            'photo' => 'photo',
-            'documents_uploaded'=>0]);
-        
+                'user_id' => $id,
+                'rollno' => 'rollno',
+                'program' => 'mcs',
+                'semester' => 3,
+                'fathername' => 'fathername',
+                'supervisor' => 'supervisor',
+                'cgpa' => 3.00,
+                'photo' => 'photo',
+                'documents_uploaded' => 0
+            ]);
         }
         //Checking For Photo
-        if($request->photo!=null){
+        if ($request->photo != null) {
             $result =  DB::table('students_profiles')
-            ->select('photo')->where('user_id', '=', $id)
-            ->first();
-                $currentPhoto=$result->photo;
-                if ($request->photo != $currentPhoto) {
-                    $name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
-                    \Image::make($request->photo)->save(public_path('img/profile/') . $name);
-                    //$request->photo=$name;
-                    $request->merge(['photo' => $name]);
-        
-                    $userPhoto = public_path('img/profile/') . $currentPhoto;
-                    if (file_exists($userPhoto)) {
-                        @unlink($userPhoto);
-                    }
+                ->select('photo')->where('user_id', '=', $id)
+                ->first();
+            $currentPhoto = $result->photo;
+            if ($request->photo != $currentPhoto) {
+                $name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+                \Image::make($request->photo)->save(public_path('img/profile/') . $name);
+                //$request->photo=$name;
+                $request->merge(['photo' => $name]);
+
+                $userPhoto = public_path('img/profile/') . $currentPhoto;
+                if (file_exists($userPhoto)) {
+                    @unlink($userPhoto);
                 }
+            }
             $updateDetails2 = [
                 'rollno' => $request->get('rollno'),
                 'program' => $request->get('program'),
@@ -171,21 +171,21 @@ class UserController extends Controller
                 'cgpa' => $request->get('cgpa'),
                 'photo' => $request->get('photo')
             ];
-        }else{
+        } else {
 
-        //Defining Arrays
-        $updateDetails2 = [
-            'rollno' => $request->get('rollno'),
-            'program' => $request->get('program'),
-            'semester' => $request->get('semester'),
-            'fathername' => $request->get('fathername'),
-            'supervisor' => $request->get('supervisor'),
-            'cgpa' => $request->get('cgpa'),
-       
-        ];
+            //Defining Arrays
+            $updateDetails2 = [
+                'rollno' => $request->get('rollno'),
+                'program' => $request->get('program'),
+                'semester' => $request->get('semester'),
+                'fathername' => $request->get('fathername'),
+                'supervisor' => $request->get('supervisor'),
+                'cgpa' => $request->get('cgpa'),
+
+            ];
         }
-          //Checking for Password
-          if (!empty($request->password)) {
+        //Checking for Password
+        if (!empty($request->password)) {
             $pass = Hash::make($request['password']);
             $request->merge(['password' => $pass]);
             $updateDetails1 = [
@@ -214,95 +214,94 @@ class UserController extends Controller
 
 
 
-        public function updateteacherProfile(Request $request)
-        {
-           
-            //Get Information
-            $user = auth('api')->user();
-            $id = $user->id;
-           
-            //Validate Request
-            $this->validate($request, [
-                'name' => 'required|string|max:200',
-                'designation' => 'required|string|max:200',
-                'contact' => 'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
-                'email' => 'required|string|email|max:200|unique:users,email,' . $user->id,
-                'password' => 'sometimes|string|min:8',
-            ]);
-            $result =  DB::table('teachers_profiles')
+    public function updateteacherProfile(Request $request)
+    {
+        $this->authorize('isTeacher');
+        //Get Information
+        $user = auth('api')->user();
+        $id = $user->id;
+
+        //Validate Request
+        $this->validate($request, [
+            'name' => 'required|string|max:200',
+            'designation' => 'required|string|max:200',
+            'contact' => 'required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
+            'email' => 'required|string|email|max:200|unique:users,email,' . $user->id,
+            'password' => 'sometimes|string|min:8',
+        ]);
+        $result =  DB::table('teachers_profiles')
             ->select('*')->where('user_id', '=', $id)
             ->first();
-         
-            if($result==null){
-                DB::table('teachers_profiles')->insert([
-                'user_id'=>$id, 
+
+        if ($result == null) {
+            DB::table('teachers_profiles')->insert([
+                'user_id' => $id,
                 'designation' => 'designation',
                 'contact' => 'contact',
                 'photo' => 'photo',
-                ]);
-               
-            }
-            //Checking For Photo
-            if($request->photo!=null){
-                $result =  DB::table('teachers_profiles')
+            ]);
+        }
+        //Checking For Photo
+        if ($request->photo != null) {
+            $result =  DB::table('teachers_profiles')
                 ->select('photo')->where('user_id', '=', $id)
                 ->first();
-                    $currentPhoto=$result->photo;
-                    if ($request->photo != $currentPhoto) {
-                        $name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
-                        \Image::make($request->photo)->save(public_path('img/profile/') . $name);
-                        //$request->photo=$name;
-                        $request->merge(['photo' => $name]);
-            
-                        $userPhoto = public_path('img/profile/') . $currentPhoto;
-                        if (file_exists($userPhoto)) {
-                            @unlink($userPhoto);
-                        }
-                    }
-                $updateDetails2 = [
-                    'designation' => $request->get('designation'),
-                    'contact' => $request->get('contact'),
-                    'photo' => $request->get('photo')
-                ];
-            }else{
-    
+            $currentPhoto = $result->photo;
+            if ($request->photo != $currentPhoto) {
+                $name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
+                \Image::make($request->photo)->save(public_path('img/profile/') . $name);
+                //$request->photo=$name;
+                $request->merge(['photo' => $name]);
+
+                $userPhoto = public_path('img/profile/') . $currentPhoto;
+                if (file_exists($userPhoto)) {
+                    @unlink($userPhoto);
+                }
+            }
+            $updateDetails2 = [
+                'designation' => $request->get('designation'),
+                'contact' => $request->get('contact'),
+                'photo' => $request->get('photo')
+            ];
+        } else {
+
             //Defining Arrays
             $updateDetails2 = [
                 'designation' => $request->get('designation'),
-                    'contact' => $request->get('contact')
-           
+                'contact' => $request->get('contact')
+
             ];
-            }
-           
-           
-               
-            //Checking for Password
-            if (!empty($request->password)) {
-                $pass = Hash::make($request['password']);
-                $request->merge(['password' => $pass]);
-                $updateDetails1 = [
-                    'name' => $request->name,
-                    'email' => $request->get('email'),
-                    'password' => $request->get('password')
-                ];
-            } else {
-                $updateDetails1 = [
-                    'name' => $request->name,
-                    'email' => $request->get('email'),
-                ];
-            }
-    
-    
-            //Update Data
-            DB::transaction(function () use ($id,  $updateDetails2, $updateDetails1) {
-                DB::table('users')
-                    ->where('id', $id)
-                    ->update($updateDetails1);
-                DB::table('teachers_profiles')
-                    ->where('user_id', $id)
-                    ->update($updateDetails2);
-            });
         }
+
+
+
+        //Checking for Password
+        if (!empty($request->password)) {
+            $pass = Hash::make($request['password']);
+            $request->merge(['password' => $pass]);
+            $updateDetails1 = [
+                'name' => $request->name,
+                'email' => $request->get('email'),
+                'password' => $request->get('password')
+            ];
+        } else {
+            $updateDetails1 = [
+                'name' => $request->name,
+                'email' => $request->get('email'),
+            ];
+        }
+
+
+        //Update Data
+        DB::transaction(function () use ($id,  $updateDetails2, $updateDetails1) {
+            DB::table('users')
+                ->where('id', $id)
+                ->update($updateDetails1);
+            DB::table('teachers_profiles')
+                ->where('user_id', $id)
+                ->update($updateDetails2);
+        });
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -312,6 +311,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('isAdmin');
         $user = User::findOrFail($id);
         if (!$request->exists('isapproved')) {
 
@@ -342,10 +342,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        
-        //DB::table('users')->where('email', '=', 100)->delete();
+
+        $this->authorize('isAdmin');
         $user = User::findOrFail($id);
-   // Delete the User
         $user->delete();
         return ['message' => 'User Deleted'];
     }

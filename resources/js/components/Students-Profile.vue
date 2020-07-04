@@ -256,7 +256,9 @@
                       type="file"
                       class="form-control"
                       id="inputProfilePhoto"
+                    :class="{'is-invalid':form.errors.has('photo')}"
                     />
+                    <has-error :form="form" field="photo"></has-error>
                   </div>
                 </div>
                 <!-- Input End-->

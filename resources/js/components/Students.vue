@@ -37,7 +37,7 @@
                   <td>4-MCS</td>
                   <td>ABCDEF</td>
                   <td>
-                    <img  :src="getProfilePhoto(student.photo)" class="pic" alt="User Image" />
+                    <img :src="getProfilePhoto(student.pic)" class="pic" alt="User Image" />
                   </td>
                   <td>
                     <a href="#" @click="editModal(student)">
