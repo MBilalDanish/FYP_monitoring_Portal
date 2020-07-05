@@ -44,7 +44,38 @@ class UserController extends Controller
             'data' => $users,
         ]);
     }
+ public function teachers(){
+    $this->authorize('isAdmin');
+    //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
+    $users = DB::table('users')->select('users.id', 'users.name', 'users.type', 'users.email', 'users.isapproved', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo as pic', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
+        ->join('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
+        ->leftjoin('students_profiles', 'users.id', '=', 'students_profiles.user_id')
+        ->get();
 
+    return response()->json([
+        'data' => $users,
+    ]);
+ }
+ public function students(){
+    $this->authorize('isAdmin');
+    //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
+    $users = DB::table('users')->select('users.id', 'users.name', 'users.type', 'users.email', 'users.isapproved', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo as pic', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
+        ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
+        ->join('students_profiles', 'users.id', '=', 'students_profiles.user_id')
+        ->get();
+
+    return response()->json([
+        'data' => $users,
+    ]);
+ }
+public function supervisors(){
+    $users = DB::table('users')->select('users.id', 'users.name')->where('type','=','supervisor')
+            ->get();
+
+        return response()->json([
+            'data' => $users,
+        ]);
+}
     /**
      * Store a newly created resource in storage.
      *
@@ -313,6 +344,7 @@ class UserController extends Controller
     {
         $this->authorize('isAdmin');
         $user = User::findOrFail($id);
+        if(!$request->exists('supervisor_id')){
         if (!$request->exists('isapproved')) {
 
             $this->validate($request, [
@@ -330,6 +362,33 @@ class UserController extends Controller
                 ->where('id', $user->id)
                 ->update(['isapproved' => true]);
         }
+    }else{
+        $this->validate($request, [
+            'name' => 'required|string|max:200',
+            'email' => 'required|string|email|max:200|unique:users,email,' . $user->id,
+            'password' => 'sometimes|string|min:8'
+        ]);
+        if (!empty($request->password)) {
+            $pass = Hash::make($request['password']);
+            $request->merge(['password' => $pass]);
+        }
+        $user->update($request->all());
+           $this->validate($request, [
+                'name' => 'required|string|max:200',
+                'email' => 'required|string|email|max:200|unique:users,email,' . $user->id,
+                'password' => 'sometimes|string|min:8'
+            ]);
+            if (!empty($request->password)) {
+                $pass = Hash::make($request['password']);
+                $request->merge(['password' => $pass]);
+            }
+            $user->update($request->all());
+            $supervisor = User::findOrFail($request->supervisor_id);
+            DB::table('students_profiles')
+                ->where('user_id', $user->id)
+                ->update(['supervisor' => $supervisor->name,
+                'supervisor_id'=>$supervisor->id]);
+    }
     }
 
 

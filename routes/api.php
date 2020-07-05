@@ -22,4 +22,7 @@ Route::put('studentprofile','API\UserController@updatestudentProfile');
 Route::get('teacherprofile','API\UserController@teacherprofile');
 Route::put('teacherprofile','API\UserController@updateteacherProfile');
 Route::apiResources(['document' => 'API\DocumentController']);
+Route::get('supervisor','API\UserController@supervisors');
+Route::get('teacher','API\UserController@teachers');
+Route::get('student','API\UserController@students');
 //Route::put('documentUpdate/{data}','API\DocumentController@updateDocument');

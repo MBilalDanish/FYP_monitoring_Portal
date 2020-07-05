@@ -238,7 +238,7 @@ export default {
     },
     loadTeachers() {
       this.$Progress.start();
-      this.form.get("api/user").then(({ data }) => (this.teachers = data));
+      this.form.get("api/teacher").then(({ data }) => (this.teachers = data));
       this.$Progress.finish();
     }
   },

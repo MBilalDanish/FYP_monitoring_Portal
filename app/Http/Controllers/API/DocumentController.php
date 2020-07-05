@@ -63,9 +63,13 @@ class DocumentController extends Controller
                 $updateDetails = [
                     'title' => $request->title,
                     'file' => $filename,
-                    'description' => $request->dexcription,
+                    'description' => $request->description,
                     'document_type' => $request->document_type
                 ];
+                $filetodelete = storage_path('app/public/docs/') . $currentFile->file;
+            if (file_exists($filetodelete)) {
+                @unlink($filetodelete);
+            }
             }
             else{
                 $updateDetails = [
@@ -73,11 +77,15 @@ class DocumentController extends Controller
                     'description' => $request->description,
                     'document_type' => $request->document_type
                 ];
-                
+             
+               
             }
             DB::table('documents')
             ->where('id', $request->id)
             ->update($updateDetails);
+            DB::table('students_profiles')
+            ->where('user_id', $id)
+            ->update(['documents_uploaded'=>true]);
             return response()->json([
                 'Update' => 'done',
             ]);
@@ -101,9 +109,10 @@ class DocumentController extends Controller
                 'file' =>$filename,
                 'marks' => 1,
                 'feedback' => 'sample',
-
-             
             ]);
+            DB::table('students_profiles')
+            ->where('user_id', $id)
+            ->update(['documents_uploaded'=>true]);
             // Read file contents...
             //$contents = file_get_contents($request->file->path());
             return response()->json([

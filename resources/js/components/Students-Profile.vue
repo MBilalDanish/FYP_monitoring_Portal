@@ -214,7 +214,7 @@
                 <!-- Input End-->
                 <!-- Input Start-->
                 <div class="form-group">
-                  <label for="inputsupervisor" class="col-sm-2 control-label">Project Supervisor</label>
+                  <label for="inputsupervisor" class="col-sm-4 control-label">Project Supervisor</label>
 
                   <div class="col-sm-12">
                     <input

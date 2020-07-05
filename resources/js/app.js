@@ -34,7 +34,8 @@ let routes = [
     { path: '/student-profile', component:require('./components/Students-Profile.vue').default },
     { path: '/teacher-profile', component:require('./components/Teachers-Profile.vue').default },
     { path: '/pending-requests', component:require('./components/Pending-Requests.vue').default },
-    { path: '/documentsmanage', component:require('./components/DocumentsManage.vue').default }
+    { path: '/documentsmanage', component:require('./components/DocumentsManage.vue').default },
+    { path: '/documentsteacher', component:require('./components/DocumentsTeacher.vue').default }
   ]
   
 let router = new VueRouter({

@@ -22,32 +22,30 @@
                   <th>Email</th>
                   <th>Semester/Program</th>
                   <th>Supervisor</th>
-                  
+
                   <th>Photo</th>
                   <th>Modify</th>
                 </tr>
                 <tr v-for="student in students.data" :key="student.id">
                   <template v-if="student.type=='student' && student.isapproved==1">
-                    
-                  
-                  <td>{{student.id }}</td>
-                  <td>{{student.name |capitalize}}</td>
-                  <td>FA18M2MA012</td>
-                  <td>{{student.email}}</td>
-                  <td>4-MCS</td>
-                  <td>ABCDEF</td>
-                  <td>
-                    <img :src="getProfilePhoto(student.pic)" class="pic" alt="User Image" />
-                  </td>
-                  <td>
-                    <a href="#" @click="editModal(student)">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                    /
-                    <a href="#" @click="deleteStudent(student.id)">
-                      <i class="fa fa-trash red"></i>
-                    </a>
-                  </td>
+                    <td>{{student.id }}</td>
+                    <td>{{student.name |capitalize}}</td>
+                    <td>{{student.rollno |capitalize}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.semester}}-{{student.program |capitalize}}</td>
+                    <td>{{student.supervisor}}</td>
+                    <td>
+                      <img :src="getProfilePhoto(student.pic)" class="pic" alt="User Image" />
+                    </td>
+                    <td>
+                      <a href="#" @click="editModal(student)">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      /
+                      <a href="#" @click="deleteStudent(student.id)">
+                        <i class="fa fa-trash red"></i>
+                      </a>
+                    </td>
                   </template>
                 </tr>
               </tbody>
@@ -91,6 +89,17 @@
               </div>
               <!--input -->
               <div class="form-group">
+                <select class="form-control" v-model="selected" @change="supervisorChanged">
+                  <option disabled value="">Assign Supervisor</option>
+                  <option
+                    v-for="option in supervisors.data"
+                    :key="option.id"
+                    v-bind:value="option.id"
+                  >{{ option.name }}</option>
+                </select>
+              </div>
+              <!--input -->
+              <div class="form-group">
                 <input
                   v-model="form.email"
                   type="email"
@@ -100,7 +109,7 @@
                 />
                 <has-error :form="form" field="email"></has-error>
               </div>
-            
+
               <!--input -->
               <div class="form-group">
                 <input
@@ -116,7 +125,7 @@
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-             <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
+              <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
               <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
             </div>
           </form>
@@ -133,20 +142,26 @@ export default {
     return {
       editmode: false,
       students: {},
+      supervisors: {},
+      selected:"",
       form: new Form({
-        id:"",
+        id: "",
         name: "",
         email: "",
         type: "student",
-        password: ""
+        password: "",
+        supervisor_id: ""
       })
     };
   },
   methods: {
-      getProfilePhoto(picuture){
+    getProfilePhoto(picuture) {
       return "img/profile/" + picuture;
     },
-      updateStudents() {
+    supervisorChanged(){
+      this.form.supervisor_id=this.selected;
+    },
+    updateStudents() {
       this.$Progress.start();
       this.form
         .put("api/user/" + this.form.id)
@@ -228,8 +243,9 @@ export default {
     },
     loadStudents() {
       this.$Progress.start();
-      this.form.get("api/user").then(({ data }) => (this.students = data));
+      this.form.get("api/student").then(({ data }) => (this.students = data));
       this.$Progress.finish();
+      axios.get("api/supervisor").then(({ data }) => (this.supervisors = data));
     }
   },
   created() {
