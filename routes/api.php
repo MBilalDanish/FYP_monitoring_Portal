@@ -25,4 +25,6 @@ Route::apiResources(['document' => 'API\DocumentController']);
 Route::get('supervisor','API\UserController@supervisors');
 Route::get('teacher','API\UserController@teachers');
 Route::get('student','API\UserController@students');
+Route::get('getdocumentsforteacher','API\DocumentController@getdocumentsforteacher');
+Route::get('singleDocument','API\DocumentController@singleDocument');
 //Route::put('documentUpdate/{data}','API\DocumentController@updateDocument');

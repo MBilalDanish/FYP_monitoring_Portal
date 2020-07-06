@@ -35,7 +35,8 @@ let routes = [
     { path: '/teacher-profile', component:require('./components/Teachers-Profile.vue').default },
     { path: '/pending-requests', component:require('./components/Pending-Requests.vue').default },
     { path: '/documentsmanage', component:require('./components/DocumentsManage.vue').default },
-    { path: '/documentsteacher', component:require('./components/DocumentsTeacher.vue').default }
+    { path: '/documentsteacher', component:require('./components/DocumentsTeacher.vue').default },
+    { path: '/singledoc', component:require('./components/singleDoc.vue').default }
   ]
   
 let router = new VueRouter({
@@ -49,7 +50,6 @@ import { Form, HasError, AlertError } from 'vform'
 window.Form=Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
-
 //Vue Filter //Vue Filter //Vue Filter 
 //Vue Filter //Vue Filter //Vue Filter 
 Vue.filter('capitalize', function (value) {
@@ -92,7 +92,7 @@ window.Fire=new Vue();
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+window.document_id='';
 const app = new Vue({
     el: '#app',
     router

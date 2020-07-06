@@ -142,7 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <router-link to='/documentsteacher' class="nav-link">
                 <i class="fas fa-clock nav-icon orange"></i>
-                <p>Profile</p>
+                <p>Manage Documents</p>
               </router-link >
           </li>
           @endcannot

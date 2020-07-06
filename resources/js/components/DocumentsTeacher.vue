@@ -6,42 +6,40 @@
           <div class="card-header">
             <h3 class="card-title" style="float:left">Documents</h3>
 
-            <button class="btn btn-success" style="float:right" @click="newModal">
-              Add New
-              <i class="fa fa-user-plus fa-fw"></i>
-            </button>
+            
           </div>
           <!-- /.card-header -->
           <div class="card-body table-responsive no-padding">
             <table class="table table-hover table-striped">
               <tbody>
                 <tr>
-                  <th>ID</th>
-                  <th>Title</th>
-                  <th>Description</th>
+                  
+                  <th>Student Roll No</th>
+                  <th>Student Name</th>
+                  <th>Project Title</th>
                   <th>Document Type</th>
                   <th>Marks</th>
                   <th>Feedback</th>
-                  <th>Modify</th>
+                  <th>Description</th>
+                  <th>Semester-Program</th>
+                  <th>View Document</th>
+                 
                 </tr>
                 <tr v-for="document in documents.data" :key="document.id">
-                  <td>{{document.id }}</td>
-                  <td>{{document.title |capitalize}}</td>
-                  <td>{{document.description }}</td>
+                  <td>{{document.rollno }}</td>
+                  <td>{{document.name |capitalize}}</td>
+                  <td>{{document.title }}</td>
                   <td>{{document.document_type}}</td>
                   <td v-if="document.marks!=1">{{document.marks }}</td>
                   <td class="text-danger font-italic font-weight-bold" v-else>Not awarded yet</td>
                   <td  v-if="document.feedback!='sample'">{{document.feedback }}</td>
                   <td class="text-danger font-italic font-weight-bold" v-else>Not available</td>
-                  <td>
-                    <a href="#" @click="editModal(document)">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                    /
-                    <a href="#" @click="deletedocument(document.id)">
-                      <i class="fa fa-trash red"></i>
-                    </a>
-                  </td>
+                  <td>{{document.description}}</td>
+                  <td>{{document.semester}}-{{document.program }}</td>
+                  <td> <a  @click="showdoc(document.id)">
+                   <i class="orange fas fa-folder-open fa-3x"></i>
+                    </a></td>
+                  
                 </tr>
               </tbody>
             </table>
@@ -148,6 +146,7 @@
 
 <script>
 export default {
+
   data() {
     return {
       editmode: false,
@@ -162,7 +161,12 @@ export default {
       })
     };
   },
+  
   methods: {
+    showdoc(d_id){
+      document_id=d_id;
+      this.$router.push('/singledoc');
+    },
       update(){
             this.$Progress.start();
       const udata = new FormData();
@@ -282,7 +286,7 @@ export default {
 
     loaddocuments() {
       this.$Progress.start();
-      this.form.get("api/document").then(({ data }) => (this.documents = data));
+      this.form.get("api/getdocumentsforteacher").then(({ data }) => (this.documents = data));
       this.$Progress.finish();
     }
   },
