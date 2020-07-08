@@ -2189,8 +2189,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     uploadFile: function uploadFile(file) {
       if (file == "") return false;
-      this.form.file = file.target.files[0];
-      console.log(this.form.file); //console.log(e);
+      this.form.file = file.target.files[0]; // console.log(this.form.file);
+      //console.log(e);
       //this.form.file = e.target.files[0];
     },
     newModal: function newModal() {
@@ -4062,17 +4062,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
-console.log(window.document_id);
-var loadingTask = vue_pdf__WEBPACK_IMPORTED_MODULE_0__["default"].createLoadingTask('../storage/docs/Air Reservation updated_sdd_2020-07-04_06-17-51pm.pdf');
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       d_id: "",
-      editmode: false,
-      documents: {},
       path: "",
-      src: loadingTask,
+      src: "",
+      marks: "",
+      feedback: "",
       numPages: 2,
       currentPage: 0,
       pageCount: 0
@@ -4082,32 +4084,91 @@ var loadingTask = vue_pdf__WEBPACK_IMPORTED_MODULE_0__["default"].createLoadingT
     pdf: vue_pdf__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
-    getPath: function getPath() {
-      return this.path;
+    getFeedback: function getFeedback() {
+      var _this = this;
+
+      swal.fire({
+        input: "textarea",
+        inputPlaceholder: "Type your message here...",
+        inputAttributes: {
+          "aria-label": "Type your message here"
+        },
+        showCancelButton: true
+      }).then(function (result) {
+        if (result.value) {
+          _this.feedback = result.value;
+
+          _this.setFeedback();
+        }
+      });
+    },
+    getMarks: function getMarks() {
+      var _this2 = this;
+
+      swal.fire({
+        title: "Assign Marks",
+        icon: "question",
+        input: "range",
+        inputAttributes: {
+          min: 5,
+          max: 100,
+          step: 1
+        },
+        inputValue: 25
+      }).then(function (result) {
+        if (result.value) {
+          _this2.marks = result.value;
+
+          _this2.setMarks();
+        }
+      });
+    },
+    setFeedback: function setFeedback() {
+      var dataf = new FormData();
+      dataf.append("d_id", this.d_id);
+      dataf.append("feedback", this.feedback);
+      axios.post("api/assignMarks", dataf).then(function (response) {
+        toast.fire({
+          icon: "success",
+          title: "Feedback Saved"
+        });
+      });
+    },
+    setMarks: function setMarks() {
+      var data = new FormData();
+      data.append("d_id", this.d_id);
+      data.append("marks", this.marks);
+      axios.post("api/assignMarks", data).then(function (response) {
+        toast.fire({
+          icon: "success",
+          title: "Marks Assigned Successfully"
+        });
+      });
+    },
+    viewDoc: function viewDoc() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.src = vue_pdf__WEBPACK_IMPORTED_MODULE_0__["default"].createLoadingTask(this.path);
+      this.src.promise.then(function (pdf) {
+        _this3.numPages = pdf.numPages;
+      });
+      this.$Progress.finish();
     },
     loadDocumentDetails: function loadDocumentDetails() {
-      var _this = this;
+      var _this4 = this;
 
       this.$Progress.start();
       axios.get("api/singleDocument/" + this.d_id).then(function (_ref) {
         var data = _ref.data;
-        return _this.path = data.data;
-      }); // loadingTask=pdf.createLoadingTask(this.documents.data);
-
+        return _this4.path = data.data;
+      });
       this.$Progress.finish();
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
-
-    this.src.promise.then(function (pdf) {
-      _this2.numPages = pdf.numPages;
-    });
-  },
-  created: function created() {
     if (document_id != "") {
-      this.d_id = document_id; //this.form.id=document_id;
-
+      this.d_id = document_id;
       this.loadDocumentDetails();
     } else {
       this.$router.push("/documentsteacher");
@@ -83592,7 +83653,26 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
             _c("div", { staticStyle: { float: "left" } }, [
-              _vm._v("View Document")
+              _c(
+                "button",
+                { staticClass: "btn btn-success", on: { click: _vm.viewDoc } },
+                [_vm._v("View Document")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "btn btn-success", on: { click: _vm.getMarks } },
+                [_vm._v("Assign Marks")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  on: { click: _vm.getFeedback }
+                },
+                [_vm._v("Give Feedback")]
+              )
             ]),
             _vm._v(" "),
             _c("div", { staticStyle: { float: "right" } }, [
@@ -99627,7 +99707,7 @@ var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.mixin({
 });
 window.toast = Toast; //Vue Pdf
 //import Pdf from 'vue-pdf';
-//window.pdf=Pdf;
+//window.PDF=Pdf;
 //Vue  //Vue   //Vue
 //Vue  //Vue   //Vue
 
@@ -99638,7 +99718,7 @@ window.Fire = new Vue();
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-window.document_id = 15;
+window.document_id = '';
 var app = new Vue({
   el: '#app',
   router: router

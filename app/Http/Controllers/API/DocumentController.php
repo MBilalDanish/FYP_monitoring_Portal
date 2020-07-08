@@ -209,4 +209,14 @@ public function updateDocument(Request $request,$data){
         DB::table('documents')->where('id', '=', $id)->delete();
         return ['message' => 'User Deleted'];
     }
+    public function assignMarks(Request $request){
+        if($request->exists('marks')){
+            DB::table('documents')->where('id','=',$request->d_id)->update(['marks'=>$request->marks]);
+        }
+        elseif($request->exists('feedback')){
+            DB::table('documents')->where('id','=',$request->d_id)->update(['feedback'=>$request->feedback]);
+        }
+        
+        return['Message'=>'Success'];
+    }
 }

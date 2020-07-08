@@ -27,4 +27,5 @@ Route::get('teacher','API\UserController@teachers');
 Route::get('student','API\UserController@students');
 Route::get('getdocumentsforteacher','API\DocumentController@getdocumentsforteacher');
 Route::get('singleDocument/{doc_id}','API\DocumentController@singleDocument');
+Route::post('assignMarks','API\DocumentController@assignMarks');
 //Route::put('documentUpdate/{data}','API\DocumentController@updateDocument');

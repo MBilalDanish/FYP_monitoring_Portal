@@ -234,7 +234,7 @@ export default {
     uploadFile(file) {
       if (file == "") return false;
       this.form.file = file.target.files[0];
-      console.log(this.form.file);
+     // console.log(this.form.file);
       //console.log(e);
       //this.form.file = e.target.files[0];
     },
