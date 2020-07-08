@@ -30148,3 +30148,11 @@ readers do not read off random characters that represent icons */
   border-radius: 4px;
 }
 
+.wrapper {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -moz-overflow-scrolling: touch;
+  -ms-overflow-scrolling: touch;
+  -overflow-scrolling: touch;
+}
+

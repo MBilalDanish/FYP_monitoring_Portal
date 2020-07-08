@@ -83,7 +83,9 @@ let Toast = Swal.mixin({
   }
 })
 window.toast=Toast;
-
+//Vue Pdf
+//import Pdf from 'vue-pdf';
+//window.pdf=Pdf;
 //Vue  //Vue   //Vue
 //Vue  //Vue   //Vue
 window.Fire=new Vue();
@@ -92,7 +94,7 @@ window.Fire=new Vue();
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-window.document_id='';
+window.document_id=15;
 const app = new Vue({
     el: '#app',
     router

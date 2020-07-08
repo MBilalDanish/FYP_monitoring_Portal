@@ -36,14 +36,21 @@ class DocumentController extends Controller
             'data' => $users,
         ]);
     }
-    public function singleDocument(Request $request)
+    public function singleDocument(Request $request, $doc_id)
     {
-        $doc_id = $request->id;
+        //$doc_id = $request->id;
+        // return['Doc ID'=>$doc_id];
         $docdetail = DB::table('documents')->select('*')->where('id', '=', $doc_id)->first();
-        // $path = storage_path('app/public/docs/') . $docdetail->file;
+        //  $path = storage_path('app/public/docs/') . $docdetail->file;
+        $path = '../storage/docs/' . $docdetail->file;
+       // return ['path'=>$path];
         return response()->json([
-            'data' =>   $docdetail,
+          'data' =>   $path
         ]);
+        /*$contents = [ 'data' =>   $path,];
+        $response = Response::make($contents, 200);
+        $response->header('Content-Type', 'text/plain');
+        return $response;*/
         //return response()->file($path);
         // return ['Path:'=>$path];
     }
