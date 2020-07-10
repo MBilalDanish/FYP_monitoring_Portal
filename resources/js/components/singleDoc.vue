@@ -9,6 +9,7 @@
               <button class="btn btn-success" @click="viewDoc">View Document</button>
               <button class="btn btn-success" @click="getMarks">Assign Marks</button>
               <button class="btn btn-success" @click="getFeedback">Give Feedback</button>
+              <button class="btn btn-success" @click="getPercent">Get Percentage</button>
             </div>
             <div style="float:right;">Page Loaded:{{currentPage}} / {{pageCount}}</div>
           </div>
@@ -37,6 +38,7 @@ import pdf from "vue-pdf";
 export default {
   data() {
     return {
+      result: {},
       d_id: "",
       path: "",
       src: "",
@@ -51,6 +53,15 @@ export default {
     pdf: pdf
   },
   methods: {
+    getPercent() {
+      const data = new FormData();
+      data.append("d_id", this.d_id);
+      axios.post("api/docCom", data).then(({ data }) => (this.result = data));
+      this.showModal();
+    },
+showModal(){
+
+},
     getFeedback() {
       swal
         .fire({

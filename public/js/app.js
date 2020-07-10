@@ -1939,12 +1939,108 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  d_id: "",
+  methods: {
+    showModal: function showModal() {
+      $("#plagirism").modal("show");
+    }
+  },
   mounted: function mounted() {},
-  created: function created() {
-    this.d_id = document_id;
-  }
+  created: function created() {}
 });
 
 /***/ }),
@@ -4066,10 +4162,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      result: {},
       d_id: "",
       path: "",
       src: "",
@@ -4084,8 +4182,20 @@ __webpack_require__.r(__webpack_exports__);
     pdf: vue_pdf__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
-    getFeedback: function getFeedback() {
+    getPercent: function getPercent() {
       var _this = this;
+
+      var data = new FormData();
+      data.append("d_id", this.d_id);
+      axios.post("api/docCom", data).then(function (_ref) {
+        var data = _ref.data;
+        return _this.result = data;
+      });
+      this.showModal();
+    },
+    showModal: function showModal() {},
+    getFeedback: function getFeedback() {
+      var _this2 = this;
 
       swal.fire({
         input: "textarea",
@@ -4096,14 +4206,14 @@ __webpack_require__.r(__webpack_exports__);
         showCancelButton: true
       }).then(function (result) {
         if (result.value) {
-          _this.feedback = result.value;
+          _this2.feedback = result.value;
 
-          _this.setFeedback();
+          _this2.setFeedback();
         }
       });
     },
     getMarks: function getMarks() {
-      var _this2 = this;
+      var _this3 = this;
 
       swal.fire({
         title: "Assign Marks",
@@ -4117,9 +4227,9 @@ __webpack_require__.r(__webpack_exports__);
         inputValue: 25
       }).then(function (result) {
         if (result.value) {
-          _this2.marks = result.value;
+          _this3.marks = result.value;
 
-          _this2.setMarks();
+          _this3.setMarks();
         }
       });
     },
@@ -4146,22 +4256,22 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     viewDoc: function viewDoc() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$Progress.start();
       this.src = vue_pdf__WEBPACK_IMPORTED_MODULE_0__["default"].createLoadingTask(this.path);
       this.src.promise.then(function (pdf) {
-        _this3.numPages = pdf.numPages;
+        _this4.numPages = pdf.numPages;
       });
       this.$Progress.finish();
     },
     loadDocumentDetails: function loadDocumentDetails() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.$Progress.start();
-      axios.get("api/singleDocument/" + this.d_id).then(function (_ref) {
-        var data = _ref.data;
-        return _this4.path = data.data;
+      axios.get("api/singleDocument/" + this.d_id).then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.path = data.data;
       });
       this.$Progress.finish();
     }
@@ -80318,16 +80428,203 @@ var render = function() {
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
-            _vm._v("Dashboard Component")
+            _vm._v("\n          Dashboard Component\n          "),
+            _c(
+              "button",
+              { staticClass: "btn btn-success", on: { click: _vm.showModal } },
+              [_vm._v("Show Modal")]
+            )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [_vm._v(_vm._s(_vm.d_id))])
+          _vm._m(0)
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "plagirism",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "plagirismLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "plagirismLabel" }
+                  },
+                  [_vm._v("Comparison Results")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "box" }, [
+                _c("div", { staticClass: "box-header" }, [
+                  _c("h3", { staticClass: "box-title" }, [
+                    _vm._v("Condensed Full Width Table")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-body no-padding" }, [
+                  _c("table", { staticClass: "table table-condensed" }, [
+                    _c("tbody", [
+                      _c("tr", [
+                        _c("th", { staticStyle: { width: "10px" } }, [
+                          _vm._v("#")
+                        ]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Task")]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v("Progress")]),
+                        _vm._v(" "),
+                        _c("th", { staticStyle: { width: "40px" } }, [
+                          _vm._v("Label")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("1.")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Update software")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("div", { staticClass: "progress progress-xs" }, [
+                            _c("div", {
+                              staticClass: "progress-bar progress-bar-danger",
+                              staticStyle: { width: "55%" }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("span", { staticClass: "badge bg-red" }, [
+                            _vm._v("55%")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("2.")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Clean database")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("div", { staticClass: "progress progress-xs" }, [
+                            _c("div", {
+                              staticClass: "progress-bar progress-bar-yellow",
+                              staticStyle: { width: "70%" }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("span", { staticClass: "badge bg-yellow" }, [
+                            _vm._v("70%")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("3.")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Cron job running")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "progress progress-xs progress-striped active"
+                            },
+                            [
+                              _c("div", {
+                                staticClass:
+                                  "progress-bar progress-bar-primary",
+                                staticStyle: { width: "30%" }
+                              })
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("span", { staticClass: "badge bg-light-blue" }, [
+                            _vm._v("30%")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("4.")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Fix and squish bugs")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "progress progress-xs progress-striped active"
+                            },
+                            [
+                              _c("div", {
+                                staticClass:
+                                  "progress-bar progress-bar-success",
+                                staticStyle: { width: "90%" }
+                              })
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("span", { staticClass: "badge bg-green" }, [
+                            _vm._v("90%")
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -83672,6 +83969,15 @@ var render = function() {
                   on: { click: _vm.getFeedback }
                 },
                 [_vm._v("Give Feedback")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  on: { click: _vm.getPercent }
+                },
+                [_vm._v("Get Percentage")]
               )
             ]),
             _vm._v(" "),
