@@ -1944,101 +1944,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  methods: {
-    showModal: function showModal() {
-      $("#plagirism").modal("show");
-    }
-  },
+  methods: {},
   mounted: function mounted() {},
   created: function created() {}
 });
@@ -4163,11 +4070,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      result: {},
+      results: {},
       d_id: "",
       path: "",
       src: "",
@@ -4189,11 +4182,13 @@ __webpack_require__.r(__webpack_exports__);
       data.append("d_id", this.d_id);
       axios.post("api/docCom", data).then(function (_ref) {
         var data = _ref.data;
-        return _this.result = data;
+        return _this.results = data;
       });
       this.showModal();
     },
-    showModal: function showModal() {},
+    showModal: function showModal() {
+      $("#plagirism").modal("show");
+    },
     getFeedback: function getFeedback() {
       var _this2 = this;
 
@@ -80423,205 +80418,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("\n          Dashboard Component\n          "),
-            _c(
-              "button",
-              { staticClass: "btn btn-success", on: { click: _vm.showModal } },
-              [_vm._v("Show Modal")]
-            )
-          ]),
-          _vm._v(" "),
-          _vm._m(0)
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          attrs: {
-            id: "plagirism",
-            tabindex: "-1",
-            role: "dialog",
-            "aria-labelledby": "plagirismLabel",
-            "aria-hidden": "true"
-          }
-        },
-        [
-          _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "plagirismLabel" }
-                  },
-                  [_vm._v("Comparison Results")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "box" }, [
-                _c("div", { staticClass: "box-header" }, [
-                  _c("h3", { staticClass: "box-title" }, [
-                    _vm._v("Condensed Full Width Table")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "box-body no-padding" }, [
-                  _c("table", { staticClass: "table table-condensed" }, [
-                    _c("tbody", [
-                      _c("tr", [
-                        _c("th", { staticStyle: { width: "10px" } }, [
-                          _vm._v("#")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Task")]),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("Progress")]),
-                        _vm._v(" "),
-                        _c("th", { staticStyle: { width: "40px" } }, [
-                          _vm._v("Label")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("1.")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Update software")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "progress progress-xs" }, [
-                            _c("div", {
-                              staticClass: "progress-bar progress-bar-danger",
-                              staticStyle: { width: "55%" }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", { staticClass: "badge bg-red" }, [
-                            _vm._v("55%")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("2.")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Clean database")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "progress progress-xs" }, [
-                            _c("div", {
-                              staticClass: "progress-bar progress-bar-yellow",
-                              staticStyle: { width: "70%" }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", { staticClass: "badge bg-yellow" }, [
-                            _vm._v("70%")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("3.")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Cron job running")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "progress progress-xs progress-striped active"
-                            },
-                            [
-                              _c("div", {
-                                staticClass:
-                                  "progress-bar progress-bar-primary",
-                                staticStyle: { width: "30%" }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", { staticClass: "badge bg-light-blue" }, [
-                            _vm._v("30%")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("4.")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Fix and squish bugs")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "progress progress-xs progress-striped active"
-                            },
-                            [
-                              _c("div", {
-                                staticClass:
-                                  "progress-bar progress-bar-success",
-                                staticStyle: { width: "90%" }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("span", { staticClass: "badge bg-green" }, [
-                            _vm._v("90%")
-                          ])
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("\n          Dashboard Component\n          \n        ")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" })
           ])
-        ]
-      )
+        ])
+      ])
     ])
   }
 ]
@@ -83977,7 +83792,7 @@ var render = function() {
                   staticClass: "btn btn-success",
                   on: { click: _vm.getPercent }
                 },
-                [_vm._v("Get Percentage")]
+                [_vm._v("Compare with Documents")]
               )
             ]),
             _vm._v(" "),
@@ -84012,13 +83827,174 @@ var render = function() {
               }),
               1
             )
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal",
+              attrs: {
+                id: "plagirism",
+                tabindex: "-1",
+                "aria-labelledby": "plagirismLabel",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog modal-dialog-centered modal-lg" },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("table", { staticClass: "table table-condensed" }, [
+                      _c(
+                        "tbody",
+                        [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _vm._l(_vm.results.data, function(result) {
+                            return _c("tr", { key: result.id }, [
+                              _c("td", [_vm._v(_vm._s(result.id))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(result.fileName))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(result.name))]),
+                              _vm._v(" "),
+                              _vm._m(2, true),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("span", { staticClass: "badge red" }, [
+                                  _vm._v(_vm._s(result.percentage))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(result.id))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(result.fileName))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(result.name))]),
+                              _vm._v(" "),
+                              _vm._m(3, true),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("span", { staticClass: "badge red" }, [
+                                  _vm._v(_vm._s(result.percentage))
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(result.id))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(result.fileName))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(result.name))]),
+                              _vm._v(" "),
+                              _vm._m(4, true),
+                              _vm._v(" "),
+                              _c("td", [
+                                _c("span", { staticClass: "badge red" }, [
+                                  _vm._v(_vm._s(result.percentage))
+                                ])
+                              ])
+                            ])
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "plagirismLabel" } },
+        [_vm._v("Comparison Results")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { staticStyle: { width: "10px" } }, [_vm._v("#")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Document")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Student")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Similarity")]),
+      _vm._v(" "),
+      _c("th", { staticStyle: { width: "40px" } }, [_vm._v("Similarity Lavel")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "progress progress-xs" }, [
+        _c("div", {
+          staticClass: "progress-bar progress-bar-danger bg-danger",
+          staticStyle: { width: "55%" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "progress progress-xs" }, [
+        _c("div", {
+          staticClass: "progress-bar progress-bar-danger bg-danger",
+          staticStyle: { width: "55%" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", { staticClass: "progress progress-xs" }, [
+        _c("div", {
+          staticClass: "progress-bar progress-bar-danger bg-danger",
+          staticStyle: { width: "55%" }
+        })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -81,24 +81,27 @@ class DocumentCompair extends Controller
         $this->authorize('isTeacher');
         $docs = DB::table('documents')->where('id', '<>', $request->d_id)->select('*')->get()->toArray();
         $fileToCom = DB::table('documents')->where('id', '=', $request->d_id)->select('file')->first();
-        $file=$fileToCom->file;
-        $result=array();
-        for ($i = 0; $i < count($docs); $i++) {
-            $path1 = storage_path('app/public/docs/') . $docs[$i]->file;
-            $path2 = storage_path('app/public/docs/') . $file;
-            if (file_exists($path1) && file_exists($path2)) {
-                $per = $this->compare($path1, $path2);
-                $per=ceil($per);
-                $arr = array('fileName' => $docs[$i]->file, 'percentage' => $per);
-                $jason = json_encode($arr);
-               array_push($result,$jason);
-                // return ['Percent'=>$per];
-            } else {
-                continue;
+        $file = $fileToCom->file;
+        $result = array();
+        $path2 = storage_path('app/public/docs/') . $file;
+        if (file_exists($path2)) {
+            for ($i = 0; $i < count($docs); $i++) {
+                $path1 = storage_path('app/public/docs/') . $docs[$i]->file;
+                if (file_exists($path1)) {
+                    $per = $this->compare($path1, $path2);
+                    $per = ceil($per);
+                    $arr = array('fileName' => $docs[$i]->file, 'percentage' => $per, 'id' => $docs[$i]->id, 'name' => $docs[$i]->title);
+                    array_push($result, $arr);
+                    
+                } else {
+                    continue;
+                }
             }
         }
-        return $result;
 
+        return response()->json([
+            'data' => $result
+        ]);
     }
 
     /**

@@ -9,7 +9,8 @@
               <button class="btn btn-success" @click="viewDoc">View Document</button>
               <button class="btn btn-success" @click="getMarks">Assign Marks</button>
               <button class="btn btn-success" @click="getFeedback">Give Feedback</button>
-              <button class="btn btn-success" @click="getPercent">Get Percentage</button>
+              <button class="btn btn-success" @click="getPercent">Compare with Documents</button>
+             
             </div>
             <div style="float:right;">Page Loaded:{{currentPage}} / {{pageCount}}</div>
           </div>
@@ -27,6 +28,91 @@
               ></pdf>
             </div>
           </div>
+          <!-- Modal -->
+          <div
+            class="modal"
+            id="plagirism"
+            tabindex="-1"
+            aria-labelledby="plagirismLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="plagirismLabel">Comparison Results</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <!-- Table -->
+                <table class="table table-condensed">
+                  <tbody>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Document</th>
+                      <th>Student</th>
+                      <th>Similarity</th>
+                      <th style="width: 40px">Similarity Lavel</th>
+                    </tr>
+                    <tr v-for="result in results.data" :key="result.id">
+                      
+                      <td>{{result.id}}</td>
+                      <td>{{result.fileName}}</td>
+                       <td>{{result.name}}</td>
+                      <td>
+                        <div class="progress progress-xs">
+                          <div
+                            class="progress-bar progress-bar-danger bg-danger"
+                            style="width: 55%"
+                          ></div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="badge red">{{result.percentage}}</span>
+                      </td>
+
+
+                      <!--Sample-->
+                      <td>{{result.id}}</td>
+                      <td>{{result.fileName}}</td>
+                       <td>{{result.name}}</td>
+                      <td>
+                        <div class="progress progress-xs">
+                          <div
+                            class="progress-bar progress-bar-danger bg-danger"
+                            style="width: 55%"
+                          ></div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="badge red">{{result.percentage}}</span>
+                      </td>
+                      <!--End Sample-->
+                      <!--Sample-->
+                      <td>{{result.id}}</td>
+                      <td>{{result.fileName}}</td>
+                       <td>{{result.name}}</td>
+                      <td>
+                        <div class="progress progress-xs">
+                          <div
+                            class="progress-bar progress-bar-danger bg-danger"
+                            style="width: 55%"
+                          ></div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="badge red">{{result.percentage}}</span>
+                      </td>
+                      <!--End Sample-->
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!--End Table-->
+              </div>
+            </div>
+          </div>
+          <!--Modal Ended-->
         </div>
       </div>
     </div>
@@ -38,7 +124,7 @@ import pdf from "vue-pdf";
 export default {
   data() {
     return {
-      result: {},
+      results: {},
       d_id: "",
       path: "",
       src: "",
@@ -56,12 +142,12 @@ export default {
     getPercent() {
       const data = new FormData();
       data.append("d_id", this.d_id);
-      axios.post("api/docCom", data).then(({ data }) => (this.result = data));
+      axios.post("api/docCom", data).then(({ data }) => (this.results = data));
       this.showModal();
     },
-showModal(){
-
-},
+    showModal() {
+      $("#plagirism").modal("show");
+    },
     getFeedback() {
       swal
         .fire({
