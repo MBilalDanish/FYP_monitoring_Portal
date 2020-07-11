@@ -3086,6 +3086,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -81515,12 +81516,19 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "widget-user-image" }, [
-            _c("img", {
-              staticClass: "img-circle",
-              attrs: { src: _vm.getProfilePhoto(), alt: "User Avatar" }
-            })
-          ]),
+          _c(
+            "div",
+            {
+              staticClass: "widget-user-image",
+              staticStyle: { "margin-top": "-50px !important" }
+            },
+            [
+              _c("img", {
+                staticClass: "img-circle",
+                attrs: { src: _vm.getProfilePhoto(), alt: "User Avatar" }
+              })
+            ]
+          ),
           _vm._v(" "),
           _vm._m(0)
         ]),
@@ -82776,12 +82784,19 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "widget-user-image" }, [
-            _c("img", {
-              staticClass: "img-circle",
-              attrs: { src: _vm.getProfilePhoto(), alt: "User Avatar" }
-            })
-          ])
+          _c(
+            "div",
+            {
+              staticClass: "widget-user-image",
+              staticStyle: { "margin-top": "-50px !important" }
+            },
+            [
+              _c("img", {
+                staticClass: "img-circle",
+                attrs: { src: _vm.getProfilePhoto(), alt: "User Avatar" }
+              })
+            ]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card nav-tabs-custom" }, [

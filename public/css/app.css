@@ -30170,8 +30170,8 @@ readers do not read off random characters that represent icons */
   border-left: 16px solid #ffef11;
   width: 120px;
   height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+  -webkit-animation: spin 3s linear infinite;
+  animation: spin 3s linear infinite;
 }
 
 @-webkit-keyframes spin {

@@ -8,14 +8,15 @@
         <div class="card card-widget widget-user mt-5">
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div
+          
             class="widget-user-header text-white"
-            style="background-image:url('./img/profile/cover.jpg');  "
+            style="background-image:url('./img/profile/cover.jpg'); "
           >
             <h3 class="widget-user-username">{{form.name}}</h3>
             <h5 class="widget-user-desc">{{form.semester}}/{{form.program}}</h5>
           </div>
-          <div class="widget-user-image">
-            <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar" />
+          <div class="widget-user-image" style="margin-top:-50px !important;">
+            <img class="img-circle"  :src="getProfilePhoto()" alt="User Avatar" />
             <!-- <img class="img-circle" src="/ndks/sjs.i" alt="User Avatar" />-->
           </div>
           <div class="card-footer" style="background-color: #201436; color:white !important;">

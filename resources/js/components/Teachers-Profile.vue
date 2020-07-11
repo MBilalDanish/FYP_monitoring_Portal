@@ -13,7 +13,7 @@
             <h3 class="widget-user-username">{{form.name}}</h3>
             <h5 class="widget-user-desc">{{form.designation}}</h5>
           </div>
-          <div class="widget-user-image">
+          <div class="widget-user-image" style="margin-top:-50px !important;">
             <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar" />
           </div>
         </div>
