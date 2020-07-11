@@ -18,6 +18,7 @@ class DocumentCompair extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+        set_time_limit(3600);
     }
 
 
@@ -79,7 +80,7 @@ class DocumentCompair extends Controller
     public function store(Request $request)
     {
         $this->authorize('isTeacher');
-        $docs = DB::table('documents')->where('id', '<>', $request->d_id)->select('*')->get()->toArray();
+        $docs = DB::table('documents')->where('id', '=', $request->d_id)->select('*')->get()->toArray();
         $fileToCom = DB::table('documents')->where('id', '=', $request->d_id)->select('file')->first();
         $file = $fileToCom->file;
         $result = array();

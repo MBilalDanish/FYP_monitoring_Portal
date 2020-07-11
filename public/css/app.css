@@ -30156,3 +30156,41 @@ readers do not read off random characters that represent icons */
   -overflow-scrolling: touch;
 }
 
+/*td:hover{
+   transform: scale(2.0); 
+    font-size: large;
+}*/
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #5353ce;
+  border-right: 16px solid #2d862d;
+  border-bottom: 16px solid #e00808;
+  border-left: 16px solid #ffef11;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

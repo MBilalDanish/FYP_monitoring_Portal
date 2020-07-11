@@ -11,8 +11,8 @@
             class="widget-user-header text-white"
             style="background-image:url('./img/profile/cover.jpg');  "
           >
-            <h3 class="widget-user-username">Elizabeth Pierce</h3>
-            <h5 class="widget-user-desc">Student</h5>
+            <h3 class="widget-user-username">{{form.name}}</h3>
+            <h5 class="widget-user-desc">{{form.semester}}/{{form.program}}</h5>
           </div>
           <div class="widget-user-image">
             <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar" />

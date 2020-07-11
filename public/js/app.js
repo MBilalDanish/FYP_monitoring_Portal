@@ -3643,39 +3643,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4132,30 +4099,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4168,7 +4111,8 @@ __webpack_require__.r(__webpack_exports__);
       feedback: "",
       numPages: 2,
       currentPage: 0,
-      pageCount: 0
+      pageCount: 0,
+      isLoading: false
     };
   },
   components: {
@@ -4178,13 +4122,17 @@ __webpack_require__.r(__webpack_exports__);
     getPercent: function getPercent() {
       var _this = this;
 
+      this.isLoading = true;
       var data = new FormData();
       data.append("d_id", this.d_id);
       axios.post("api/docCom", data).then(function (_ref) {
         var data = _ref.data;
         return _this.results = data;
+      })["catch"](function () {})["finally"](function () {
+        _this.isLoading = false;
+
+        _this.showModal();
       });
-      this.showModal();
     },
     showModal: function showModal() {
       $("#plagirism").modal("show");
@@ -81546,7 +81494,26 @@ var render = function() {
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-10" }, [
         _c("div", { staticClass: "card card-widget widget-user mt-5" }, [
-          _vm._m(0),
+          _c(
+            "div",
+            {
+              staticClass: "widget-user-header text-white",
+              staticStyle: {
+                "background-image": "url('./img/profile/cover.jpg')"
+              }
+            },
+            [
+              _c("h3", { staticClass: "widget-user-username" }, [
+                _vm._v(_vm._s(_vm.form.name))
+              ]),
+              _vm._v(" "),
+              _c("h5", { staticClass: "widget-user-desc" }, [
+                _vm._v(
+                  _vm._s(_vm.form.semester) + "/" + _vm._s(_vm.form.program)
+                )
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "widget-user-image" }, [
             _c("img", {
@@ -81555,11 +81522,11 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(0)
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card nav-tabs-custom" }, [
-          _vm._m(2),
+          _vm._m(1),
           _vm._v(" "),
           _c("div", { staticClass: "tab-content" }, [
             _c("div", { staticClass: "tab-pane", attrs: { id: "activity" } }),
@@ -82228,25 +82195,6 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "widget-user-header text-white",
-        staticStyle: { "background-image": "url('./img/profile/cover.jpg')" }
-      },
-      [
-        _c("h3", { staticClass: "widget-user-username" }, [
-          _vm._v("Elizabeth Pierce")
-        ]),
-        _vm._v(" "),
-        _c("h5", { staticClass: "widget-user-desc" }, [_vm._v("Student")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
         staticClass: "card-footer",
         staticStyle: {
           "background-color": "#201436",
@@ -82807,22 +82755,37 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-10" }, [
+      _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "card card-widget widget-user mt-5" }, [
-          _vm._m(0),
+          _c(
+            "div",
+            {
+              staticClass: "widget-user-header text-white",
+              staticStyle: {
+                "background-image": "url('./img/profile/cover.jpg')"
+              }
+            },
+            [
+              _c("h3", { staticClass: "widget-user-username" }, [
+                _vm._v(_vm._s(_vm.form.name))
+              ]),
+              _vm._v(" "),
+              _c("h5", { staticClass: "widget-user-desc" }, [
+                _vm._v(_vm._s(_vm.form.designation))
+              ])
+            ]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "widget-user-image" }, [
             _c("img", {
               staticClass: "img-circle",
               attrs: { src: _vm.getProfilePhoto(), alt: "User Avatar" }
             })
-          ]),
-          _vm._v(" "),
-          _vm._m(1)
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card nav-tabs-custom" }, [
-          _vm._m(2),
+          _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "tab-content" }, [
             _c("div", { staticClass: "tab-pane", attrs: { id: "activity" } }),
@@ -83174,76 +83137,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "widget-user-header text-white",
-        staticStyle: { "background-image": "url('./img/profile/cover.jpg')" }
-      },
-      [
-        _c("h3", { staticClass: "widget-user-username" }, [
-          _vm._v("Elizabeth Pierce")
-        ]),
-        _vm._v(" "),
-        _c("h5", { staticClass: "widget-user-desc" }, [_vm._v("Teacher")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "card-footer",
-        staticStyle: {
-          "background-color": "#201436",
-          color: "white !important"
-        }
-      },
-      [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-4 border-right" }, [
-            _c("div", { staticClass: "description-block" }, [
-              _c("h5", { staticClass: "description-header" }, [
-                _vm._v(
-                  "\n                  Your account is approved\n                  "
-                ),
-                _c("i", { staticClass: "fas fa-check-circle" })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4 border-right" }, [
-            _c("div", { staticClass: "description-block" }, [
-              _c("h5", { staticClass: "description-header" }, [
-                _vm._v("13,000")
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "description-text" }, [
-                _vm._v("FOLLOWERS")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("div", { staticClass: "description-block" }, [
-              _c("h5", { staticClass: "description-header" }, [_vm._v("35")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "description-text" }, [
-                _vm._v("PRODUCTS")
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -83766,47 +83659,77 @@ var render = function() {
           _c("div", { staticClass: "card-header" }, [
             _c("div", { staticStyle: { float: "left" } }, [
               _c(
-                "button",
-                { staticClass: "btn btn-success", on: { click: _vm.viewDoc } },
-                [_vm._v("View Document")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                { staticClass: "btn btn-success", on: { click: _vm.getMarks } },
-                [_vm._v("Assign Marks")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
+                "div",
                 {
-                  staticClass: "btn btn-success",
-                  on: { click: _vm.getFeedback }
+                  staticClass: "btn-group",
+                  attrs: { role: "group", "aria-label": "Basic example" }
                 },
-                [_vm._v("Give Feedback")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  on: { click: _vm.getPercent }
-                },
-                [_vm._v("Compare with Documents")]
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { disabled: _vm.isLoading },
+                      on: { click: _vm.viewDoc }
+                    },
+                    [_vm._v("View Document")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { disabled: _vm.isLoading },
+                      on: { click: _vm.getMarks }
+                    },
+                    [_vm._v("Assign Marks")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning",
+                      attrs: { disabled: _vm.isLoading },
+                      on: { click: _vm.getFeedback }
+                    },
+                    [_vm._v("Give Feedback")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { disabled: _vm.isLoading },
+                      on: { click: _vm.getPercent }
+                    },
+                    [_vm._v("Compare with Documents")]
+                  )
+                ]
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticStyle: { float: "right" } }, [
-              _vm._v(
-                "Page Loaded:" +
-                  _vm._s(_vm.currentPage) +
-                  " / " +
-                  _vm._s(_vm.pageCount)
-              )
-            ])
+            _c(
+              "div",
+              { staticClass: "text-bold", staticStyle: { float: "right" } },
+              [
+                _vm._v(
+                  "Page Loaded:" +
+                    _vm._s(_vm.currentPage) +
+                    " / " +
+                    _vm._s(_vm.pageCount)
+                )
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
+            _vm.isLoading
+              ? _c("div", {
+                  staticClass: "loader",
+                  staticStyle: { "margin-right": "-500" }
+                })
+              : _vm._e(),
+            _vm._v(" "),
             _c(
               "div",
               { staticClass: "wrapper" },
@@ -83866,35 +83789,7 @@ var render = function() {
                               _vm._v(" "),
                               _c("td", [
                                 _c("span", { staticClass: "badge red" }, [
-                                  _vm._v(_vm._s(result.percentage))
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(result.id))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(result.fileName))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(result.name))]),
-                              _vm._v(" "),
-                              _vm._m(3, true),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c("span", { staticClass: "badge red" }, [
-                                  _vm._v(_vm._s(result.percentage))
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(result.id))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(result.fileName))]),
-                              _vm._v(" "),
-                              _c("td", [_vm._v(_vm._s(result.name))]),
-                              _vm._v(" "),
-                              _vm._m(4, true),
-                              _vm._v(" "),
-                              _c("td", [
-                                _c("span", { staticClass: "badge red" }, [
-                                  _vm._v(_vm._s(result.percentage))
+                                  _vm._v(_vm._s(result.percentage) + "%")
                                 ])
                               ])
                             ])
@@ -83953,32 +83848,6 @@ var staticRenderFns = [
       _c("th", [_vm._v("Similarity")]),
       _vm._v(" "),
       _c("th", { staticStyle: { width: "40px" } }, [_vm._v("Similarity Lavel")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "progress progress-xs" }, [
-        _c("div", {
-          staticClass: "progress-bar progress-bar-danger bg-danger",
-          staticStyle: { width: "55%" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("div", { staticClass: "progress progress-xs" }, [
-        _c("div", {
-          staticClass: "progress-bar progress-bar-danger bg-danger",
-          staticStyle: { width: "55%" }
-        })
-      ])
     ])
   },
   function() {

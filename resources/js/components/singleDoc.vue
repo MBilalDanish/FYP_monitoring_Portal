@@ -6,16 +6,27 @@
         <div class="card">
           <div class="card-header">
             <div style="float:left;">
-              <button class="btn btn-success" @click="viewDoc">View Document</button>
-              <button class="btn btn-success" @click="getMarks">Assign Marks</button>
-              <button class="btn btn-success" @click="getFeedback">Give Feedback</button>
-              <button class="btn btn-success" @click="getPercent">Compare with Documents</button>
-             
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn btn-success" :disabled="isLoading" @click="viewDoc">View Document</button>
+                <button class="btn btn-primary" :disabled="isLoading" @click="getMarks">Assign Marks</button>
+                <button
+                  class="btn btn-warning"
+                  :disabled="isLoading"
+                  @click="getFeedback"
+                >Give Feedback</button>
+                <button
+                  class="btn btn-danger"
+                  :disabled="isLoading"
+                  @click="getPercent"
+                >Compare with Documents</button>
+              </div>
             </div>
-            <div style="float:right;">Page Loaded:{{currentPage}} / {{pageCount}}</div>
+           
+            <div style="float:right;" class="text-bold">Page Loaded:{{currentPage}} / {{pageCount}}</div>
           </div>
 
           <div class="card-body">
+             <div class="loader" style="margin-right:-500;" v-if="isLoading"></div>
             <div class="wrapper">
               <pdf
                 v-for="i in numPages"
@@ -55,10 +66,9 @@
                       <th style="width: 40px">Similarity Lavel</th>
                     </tr>
                     <tr v-for="result in results.data" :key="result.id">
-                      
                       <td>{{result.id}}</td>
                       <td>{{result.fileName}}</td>
-                       <td>{{result.name}}</td>
+                      <td>{{result.name}}</td>
                       <td>
                         <div class="progress progress-xs">
                           <div
@@ -68,42 +78,8 @@
                         </div>
                       </td>
                       <td>
-                        <span class="badge red">{{result.percentage}}</span>
+                        <span class="badge red">{{result.percentage}}%</span>
                       </td>
-
-
-                      <!--Sample-->
-                      <td>{{result.id}}</td>
-                      <td>{{result.fileName}}</td>
-                       <td>{{result.name}}</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div
-                            class="progress-bar progress-bar-danger bg-danger"
-                            style="width: 55%"
-                          ></div>
-                        </div>
-                      </td>
-                      <td>
-                        <span class="badge red">{{result.percentage}}</span>
-                      </td>
-                      <!--End Sample-->
-                      <!--Sample-->
-                      <td>{{result.id}}</td>
-                      <td>{{result.fileName}}</td>
-                       <td>{{result.name}}</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div
-                            class="progress-bar progress-bar-danger bg-danger"
-                            style="width: 55%"
-                          ></div>
-                        </div>
-                      </td>
-                      <td>
-                        <span class="badge red">{{result.percentage}}</span>
-                      </td>
-                      <!--End Sample-->
                     </tr>
                   </tbody>
                 </table>
@@ -132,7 +108,8 @@ export default {
       feedback: "",
       numPages: 2,
       currentPage: 0,
-      pageCount: 0
+      pageCount: 0,
+      isLoading: false
     };
   },
   components: {
@@ -140,10 +117,17 @@ export default {
   },
   methods: {
     getPercent() {
+      this.isLoading = true;
       const data = new FormData();
       data.append("d_id", this.d_id);
-      axios.post("api/docCom", data).then(({ data }) => (this.results = data));
-      this.showModal();
+      axios
+        .post("api/docCom", data)
+        .then(({ data }) => (this.results = data))
+        .catch(() => {})
+        .finally(() => {
+          this.isLoading = false;
+          this.showModal();
+        });
     },
     showModal() {
       $("#plagirism").modal("show");

@@ -4,50 +4,17 @@
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-10">
+      <div class="col-md-8">
         <div class="card card-widget widget-user mt-5">
-          <!-- Add the bg color to the header using any of the bg-* classes -->
           <div
             class="widget-user-header text-white"
             style="background-image:url('./img/profile/cover.jpg');  "
           >
-            <h3 class="widget-user-username">Elizabeth Pierce</h3>
-            <h5 class="widget-user-desc">Teacher</h5>
+            <h3 class="widget-user-username">{{form.name}}</h3>
+            <h5 class="widget-user-desc">{{form.designation}}</h5>
           </div>
           <div class="widget-user-image">
             <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar" />
-            <!-- <img class="img-circle" src="/ndks/sjs.i" alt="User Avatar" />-->
-          </div>
-          <div class="card-footer" style="background-color: #201436; color:white !important;">
-            <div class="row">
-              <div class="col-sm-4 border-right">
-                <div class="description-block">
-                  <h5 class="description-header">
-                    Your account is approved
-                    <i class="fas fa-check-circle"></i>
-                  </h5>
-                </div>
-                <!-- /.description-block -->
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-4 border-right">
-                <div class="description-block">
-                  <h5 class="description-header">13,000</h5>
-                  <span class="description-text">FOLLOWERS</span>
-                </div>
-                <!-- /.description-block -->
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-4">
-                <div class="description-block">
-                  <h5 class="description-header">35</h5>
-                  <span class="description-text">PRODUCTS</span>
-                </div>
-                <!-- /.description-block -->
-              </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
           </div>
         </div>
         <!--Profile Setting-->
