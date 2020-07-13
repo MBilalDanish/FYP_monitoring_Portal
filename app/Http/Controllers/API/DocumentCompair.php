@@ -80,7 +80,7 @@ class DocumentCompair extends Controller
     public function store(Request $request)
     {
         $this->authorize('isTeacher');
-        $docs = DB::table('documents')->where('id', '=', $request->d_id)->select('*')->get()->toArray();
+        $docs = DB::table('documents')->where('id', '<>', $request->d_id)->select('*')->get()->toArray();
         $fileToCom = DB::table('documents')->where('id', '=', $request->d_id)->select('file')->first();
         $file = $fileToCom->file;
         $result = array();

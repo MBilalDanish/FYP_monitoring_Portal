@@ -21,12 +21,12 @@
                 >Compare with Documents</button>
               </div>
             </div>
-           
+
             <div style="float:right;" class="text-bold">Page Loaded:{{currentPage}} / {{pageCount}}</div>
           </div>
 
           <div class="card-body">
-             <div class="loader" style="margin-right:-500;" v-if="isLoading"></div>
+            <div class="loader" style="margin-right:-500;" v-if="isLoading"></div>
             <div class="wrapper">
               <pdf
                 v-for="i in numPages"
@@ -70,10 +70,26 @@
                       <td>{{result.fileName}}</td>
                       <td>{{result.name}}</td>
                       <td>
-                        <div class="progress progress-xs">
+                        <div class="progress rounded-0">
                           <div
-                            class="progress-bar progress-bar-danger bg-danger"
-                            style="width: 55%"
+                            v-show="checkPercentage1(result.percentage)"
+                            class="progress-bar progress-bar-striped progress-bar-animated level1"
+                            :style="{'width':result.percentage+'%'}"
+                          ></div>
+                          <div
+                            v-show="checkPercentage2(result.percentage)"
+                            class="progress-bar progress-bar-striped progress-bar-animated level2"
+                            :style="{'width':result.percentage+'%'}"
+                          ></div>
+                          <div
+                            v-show="checkPercentage3(result.percentage)"
+                            class="progress-bar progress-bar-striped progress-bar-animated level3"
+                            :style="{'width':result.percentage+'%'}"
+                          ></div>
+                          <div
+                            v-show="checkPercentage4(result.percentage)"
+                            class="progress-bar progress-bar-striped progress-bar-animated level4"
+                            :style="{'width':result.percentage+'%'}"
                           ></div>
                         </div>
                       </td>
@@ -116,6 +132,22 @@ export default {
     pdf: pdf
   },
   methods: {
+    checkPercentage1(per) {
+      if (per > 0 && per <= 27) return true;
+      return false;
+    },
+    checkPercentage2(per) {
+      if (per > 27 && per <= 50) return true;
+      return false;
+    },
+    checkPercentage3(per) {
+      if (per > 50 && per <= 75) return true;
+      return false;
+    },
+    checkPercentage4(per) {
+      if (per > 75) return true;
+      return false;
+    },
     getPercent() {
       this.isLoading = true;
       const data = new FormData();

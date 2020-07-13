@@ -29,4 +29,5 @@ Route::get('getdocumentsforteacher','API\DocumentController@getdocumentsforteach
 Route::get('singleDocument/{doc_id}','API\DocumentController@singleDocument');
 Route::post('assignMarks','API\DocumentController@assignMarks');
 Route::apiResources(['docCom' => 'API\DocumentCompair']);
+Route::get('getStats','API\UserController@getStats');
 //Route::put('documentUpdate/{data}','API\DocumentController@updateDocument');

@@ -1,14 +1,10 @@
-
-
-</style>
 <template>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-10">
+      <div class="col-md-8">
         <div class="card card-widget widget-user mt-5">
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div
-          
             class="widget-user-header text-white"
             style="background-image:url('./img/profile/cover.jpg'); "
           >
@@ -16,72 +12,36 @@
             <h5 class="widget-user-desc">{{form.semester}}/{{form.program}}</h5>
           </div>
           <div class="widget-user-image" style="margin-top:-50px !important;">
-            <img class="img-circle"  :src="getProfilePhoto()" alt="User Avatar" />
-            <!-- <img class="img-circle" src="/ndks/sjs.i" alt="User Avatar" />-->
-          </div>
-          <div class="card-footer" style="background-color: #201436; color:white !important;">
-            <div class="row">
-              <div class="col-sm-4 border-right">
-                <div class="description-block">
-                  <h5 class="description-header">
-                    Your account is approved
-                    <i class="fas fa-check-circle"></i>
-                  </h5>
-                </div>
-                <!-- /.description-block -->
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-4 border-right">
-                <div class="description-block">
-                  <h5 class="description-header">13,000</h5>
-                  <span class="description-text">FOLLOWERS</span>
-                </div>
-                <!-- /.description-block -->
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-4">
-                <div class="description-block">
-                  <h5 class="description-header">35</h5>
-                  <span class="description-text">PRODUCTS</span>
-                </div>
-                <!-- /.description-block -->
-              </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
+            <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar" />
           </div>
         </div>
         <!--Profile Setting-->
         <div class="card nav-tabs-custom">
           <div class="card-header">
             <ul class="nav nav-tabs card-header">
-              <li>
+              <li class="active">
                 <a
-                  class="btn btn-primary"
+                  class="btn btn-danger"
                   href="#activity"
                   data-toggle="tab"
-                  aria-expanded="false"
-                >Activity</a>
+                  aria-expanded="true"
+                >Close</a>
               </li>
-              <li class="active">
+              <li>
                 <a
                   class="mx-2 btn btn-primary"
                   href="#settings"
                   data-toggle="tab"
-                  aria-expanded="true"
+                  aria-expanded="false"
                 >Edit your Profile</a>
               </li>
             </ul>
           </div>
           <div class="tab-content">
-            <div class="tab-pane" id="activity"></div>
-            <!-- /.tab-pane -->
-            <div class="tab-pane" id="timeline">
-              <!-- The timeline -->
-            </div>
+            <div class="tab-pane active" id="activity"></div>
             <!-- /.tab-pane -->
 
-            <div class="tab-pane active" id="settings">
+            <div class="tab-pane" id="settings">
               <form class="form-horizontal">
                 <!-- Input Start-->
                 <div class="form-group">
@@ -214,19 +174,31 @@
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
+                <div class="form-group"  @click="showNotEdit">
                   <label for="inputsupervisor" class="col-sm-4 control-label">Project Supervisor</label>
 
                   <div class="col-sm-12">
                     <input
+                      :disabled="true"
                       v-model="form.supervisor"
                       type="text"
                       class="form-control"
                       id="inputsupervisor"
                       placeholder="Project Supervisor"
-                      :class="{'is-invalid':form.errors.has('supervisor')}"
+                      v-if="form.supervisor!='' && form.supervisor!='supervisor'"
+                     
+                      
                     />
-                    <has-error :form="form" field="supervisor"></has-error>
+                    <input
+                      :disabled="true"
+                      type="text"
+                      class="form-control"
+                      id="inputsupervisor"
+                      placeholder="Not assigned yet/Only Admin can Assign Supervisor"
+                      v-else
+                     
+                    />
+                   
                   </div>
                 </div>
                 <!-- Input End-->
@@ -257,7 +229,7 @@
                       type="file"
                       class="form-control"
                       id="inputProfilePhoto"
-                    :class="{'is-invalid':form.errors.has('photo')}"
+                      :class="{'is-invalid':form.errors.has('photo')}"
                     />
                     <has-error :form="form" field="photo"></has-error>
                   </div>
@@ -321,17 +293,27 @@ export default {
     };
   },
   methods: {
+    showNotEdit() {
+      swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "You can't edit this feild,Only Admin can assign supervisors.",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    },
     semesterShow() {
       if (this.form.program != mcs) return true;
       return false;
     },
     getProfilePhoto() {
-      if(this.form.photo!=null){
-      let pPhoto =
-        this.form.photo.length > 100
-          ? this.form.photo
-          : "img/profile/" + this.form.photo;
-      return pPhoto;}
+      if (this.form.photo != null) {
+        let pPhoto =
+          this.form.photo.length > 100
+            ? this.form.photo
+            : "img/profile/" + this.form.photo;
+        return pPhoto;
+      }
     },
     updateInfo() {
       this.$Progress.start();

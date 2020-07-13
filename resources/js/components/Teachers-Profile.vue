@@ -1,6 +1,4 @@
 
-
-</style>
 <template>
   <div class="container">
     <div class="row justify-content-center">
@@ -21,15 +19,15 @@
         <div class="card nav-tabs-custom">
           <div class="card-header">
             <ul class="nav nav-tabs card-header">
-              <li>
+              <li class="active">
                 <a
-                  class="btn btn-primary"
+                  class="btn btn-danger"
                   href="#activity"
                   data-toggle="tab"
                   aria-expanded="false"
-                >Activity</a>
+                >Close</a>
               </li>
-              <li class="active">
+              <li>
                 <a
                   class="mx-2 btn btn-primary"
                   href="#settings"
@@ -40,14 +38,11 @@
             </ul>
           </div>
           <div class="tab-content">
-            <div class="tab-pane" id="activity"></div>
-            <!-- /.tab-pane -->
-            <div class="tab-pane" id="timeline">
-              <!-- The timeline -->
-            </div>
+            <div class="tab-pane active" id="activity"></div>
+
             <!-- /.tab-pane -->
 
-            <div class="tab-pane active" id="settings">
+            <div class="tab-pane" id="settings">
               <form class="form-horizontal">
                 <!-- Input Start-->
                 <div class="form-group">
@@ -114,7 +109,7 @@
                   </div>
                 </div>
                 <!-- Input End-->
-             
+
                 <!-- Input Start-->
                 <div class="form-group">
                   <label for="inputsupervisor" class="col-sm-2 control-label">Contact No</label>
@@ -204,14 +199,13 @@ export default {
       return false;
     },
     getProfilePhoto() {
-        if(this.form.photo!=null){
- let pPhoto =
-        this.form.photo.length > 100
-          ? this.form.photo
-          : "img/profile/" + this.form.photo;
-      return pPhoto;
-        }
-     
+      if (this.form.photo != null) {
+        let pPhoto =
+          this.form.photo.length > 100
+            ? this.form.photo
+            : "img/profile/" + this.form.photo;
+        return pPhoto;
+      }
     },
     updateInfo() {
       this.$Progress.start();

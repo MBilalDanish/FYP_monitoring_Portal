@@ -18,6 +18,7 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 $anycolor: #201436;
+$aqua:aqua;
 .blue{
     color:$blue;
 }
@@ -47,4 +48,16 @@ $anycolor: #201436;
 }
 .cyan{
     color:$cyan;
+}
+.bg-purple{
+    background-color: $purple;
+}
+.bg-aqua{
+    background-color: $aqua;
+}
+.bg-greenbrown{
+    background-color: #966006;
+}
+.bg-darkyellow{
+    background-color: #d5b60a;
 }

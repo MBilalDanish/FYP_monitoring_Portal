@@ -13127,6 +13127,22 @@ a.text-muted:hover {
   color: #6cb2eb;
 }
 
+.bg-purple {
+  background-color: #9561e2;
+}
+
+.bg-aqua {
+  background-color: aqua;
+}
+
+.bg-greenbrown {
+  background-color: #966006;
+}
+
+.bg-darkyellow {
+  background-color: #d5b60a;
+}
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -30192,5 +30208,29 @@ readers do not read off random characters that represent icons */
   100% {
     transform: rotate(360deg);
   }
+}
+
+.small-box .icon {
+  font-size: 50px;
+}
+
+.level1 {
+  background-color: green;
+  color: green;
+}
+
+.level2 {
+  background-color: #ca8722;
+  color: #ca8722;
+}
+
+.level3 {
+  background-color: #d7f335;
+  color: #d7f335;
+}
+
+.level4 {
+  background-color: #ce1010;
+  color: #ce1010;
 }
 

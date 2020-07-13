@@ -9,6 +9,7 @@
 //admin-lte
 @import '~admin-lte/dist/css/adminlte.css';
 
+
 //Fonts Awesome
 $fa-font-path:        "../webfonts";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
@@ -61,3 +62,23 @@ $fa-font-path:        "../webfonts";
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+  .small-box .icon {
+    font-size: 50px;
+}
+.level1{
+  background-color: green;
+  color:green;
+  
+}
+.level2{
+  background-color: rgb(202, 135, 34);
+  color:rgb(202, 135, 34);
+}
+.level3{
+  background-color: rgb(215, 243, 53);
+  color:rgb(215, 243, 53);
+}
+.level4{
+  background-color: rgb(206, 16, 16);
+  color:rgb(206, 16, 16);
+}

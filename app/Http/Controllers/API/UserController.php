@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Hamcrest\Arrays\IsArray;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -44,38 +45,41 @@ class UserController extends Controller
             'data' => $users,
         ]);
     }
- public function teachers(){
-    $this->authorize('isAdmin');
-    //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
-    $users = DB::table('users')->select('users.id', 'users.name', 'users.type', 'users.email', 'users.isapproved', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo as pic', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
-        ->join('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
-        ->leftjoin('students_profiles', 'users.id', '=', 'students_profiles.user_id')
-        ->get();
-
-    return response()->json([
-        'data' => $users,
-    ]);
- }
- public function students(){
-    $this->authorize('isAdmin');
-    //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
-    $users = DB::table('users')->select('users.id', 'users.name', 'users.type', 'users.email', 'users.isapproved', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo as pic', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
-        ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
-        ->join('students_profiles', 'users.id', '=', 'students_profiles.user_id')
-        ->get();
-
-    return response()->json([
-        'data' => $users,
-    ]);
- }
-public function supervisors(){
-    $users = DB::table('users')->select('users.id', 'users.name')->where('type','=','supervisor')
+    public function teachers()
+    {
+        $this->authorize('isAdmin');
+        //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
+        $users = DB::table('users')->select('users.id', 'users.name', 'users.type', 'users.email', 'users.isapproved', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo as pic', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
+            ->join('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
+            ->leftjoin('students_profiles', 'users.id', '=', 'students_profiles.user_id')
             ->get();
 
         return response()->json([
             'data' => $users,
         ]);
-}
+    }
+    public function students()
+    {
+        $this->authorize('isAdmin');
+        //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
+        $users = DB::table('users')->select('users.id', 'users.name', 'users.type', 'users.email', 'users.isapproved', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo as pic', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
+            ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
+            ->join('students_profiles', 'users.id', '=', 'students_profiles.user_id')
+            ->get();
+
+        return response()->json([
+            'data' => $users,
+        ]);
+    }
+    public function supervisors()
+    {
+        $users = DB::table('users')->select('users.id', 'users.name')->where('type', '=', 'supervisor')
+            ->get();
+
+        return response()->json([
+            'data' => $users,
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -110,6 +114,32 @@ public function supervisors(){
     {
         //
     }
+    public function getStats()
+    {
+        $docs = DB::table('documents')->select('*')->get();
+        $no_docs = sizeof(json_decode($docs));
+        $supervisors = DB::table('users')->where('type', '=', 'supervisor')->select('*')->get();
+        $no_supervisors = sizeof(json_decode($supervisors));
+        $externals = DB::table('users')->where('type', '=', 'external')->select('*')->get();
+        $no_externals = sizeof(json_decode($externals));
+        $students = DB::table('users')->where('type', '=', 'student')->select('*')->get();
+        $no_students = sizeof(json_decode($students));
+        $admins = DB::table('users')->where('type', '=', 'admin')->select('*')->get();
+        $no_admins = sizeof(json_decode($admins));
+        $requests = DB::table('users')->where('isapproved', '=', false)->select('*')->get();
+        $no_requests = sizeof(json_decode($requests));
+        $stats = array(
+            'no_docs' => $no_docs,
+            'no_supervisors' => $no_supervisors,
+            'no_externals' => $no_externals,
+            'no_students' => $no_students,
+            'no_admins' => $no_admins,
+            'no_requests' => $no_requests,
+        );
+        return response()->json([
+            'data' => $stats,
+        ]);
+    }
     public function studentprofile()
     {
         $this->authorize('isStudent');
@@ -141,7 +171,7 @@ public function supervisors(){
 
 
     public function updatestudentProfile(Request $request)
-    {$this->authorize('isStudent');
+    {
         $this->authorize('isStudent');
         //Get Information
         $user = auth('api')->user();
@@ -154,7 +184,6 @@ public function supervisors(){
             'rollno' => 'required|string|max:200',
             'program' => 'required|string|max:200',
             'semester' => 'required|string|max:200',
-            'supervisor' => 'required|string|max:200',
             'cgpa' => 'required',
             'email' => 'required|string|email|max:200|unique:users,email,' . $user->id,
             'password' => 'sometimes|string|min:8',
@@ -198,7 +227,6 @@ public function supervisors(){
                 'program' => $request->get('program'),
                 'semester' => $request->get('semester'),
                 'fathername' => $request->get('fathername'),
-                'supervisor' => $request->get('supervisor'),
                 'cgpa' => $request->get('cgpa'),
                 'photo' => $request->get('photo')
             ];
@@ -210,7 +238,6 @@ public function supervisors(){
                 'program' => $request->get('program'),
                 'semester' => $request->get('semester'),
                 'fathername' => $request->get('fathername'),
-                'supervisor' => $request->get('supervisor'),
                 'cgpa' => $request->get('cgpa'),
 
             ];
@@ -344,9 +371,25 @@ public function supervisors(){
     {
         $this->authorize('isAdmin');
         $user = User::findOrFail($id);
-        if(!$request->exists('supervisor_id')){
-        if (!$request->exists('isapproved')) {
+        if (!$request->exists('supervisor_id')) {
+            if (!$request->exists('isapproved')) {
 
+                $this->validate($request, [
+                    'name' => 'required|string|max:200',
+                    'email' => 'required|string|email|max:200|unique:users,email,' . $user->id,
+                    'password' => 'sometimes|string|min:8'
+                ]);
+                if (!empty($request->password)) {
+                    $pass = Hash::make($request['password']);
+                    $request->merge(['password' => $pass]);
+                }
+                $user->update($request->all());
+            } else {
+                DB::table('users')
+                    ->where('id', $user->id)
+                    ->update(['isapproved' => true]);
+            }
+        } else {
             $this->validate($request, [
                 'name' => 'required|string|max:200',
                 'email' => 'required|string|email|max:200|unique:users,email,' . $user->id,
@@ -357,23 +400,7 @@ public function supervisors(){
                 $request->merge(['password' => $pass]);
             }
             $user->update($request->all());
-        } else {
-            DB::table('users')
-                ->where('id', $user->id)
-                ->update(['isapproved' => true]);
-        }
-    }else{
-        $this->validate($request, [
-            'name' => 'required|string|max:200',
-            'email' => 'required|string|email|max:200|unique:users,email,' . $user->id,
-            'password' => 'sometimes|string|min:8'
-        ]);
-        if (!empty($request->password)) {
-            $pass = Hash::make($request['password']);
-            $request->merge(['password' => $pass]);
-        }
-        $user->update($request->all());
-           $this->validate($request, [
+            $this->validate($request, [
                 'name' => 'required|string|max:200',
                 'email' => 'required|string|email|max:200|unique:users,email,' . $user->id,
                 'password' => 'sometimes|string|min:8'
@@ -386,9 +413,11 @@ public function supervisors(){
             $supervisor = User::findOrFail($request->supervisor_id);
             DB::table('students_profiles')
                 ->where('user_id', $user->id)
-                ->update(['supervisor' => $supervisor->name,
-                'supervisor_id'=>$supervisor->id]);
-    }
+                ->update([
+                    'supervisor' => $supervisor->name,
+                    'supervisor_id' => $supervisor->id
+                ]);
+        }
     }
 
 

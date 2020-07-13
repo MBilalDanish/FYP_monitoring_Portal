@@ -14,6 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>FYP Monitoring Portal</title>
 <!--Style-->
   <link rel="stylesheet" href="/css/app.css">
+  
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
@@ -77,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <router-link to="/dashboard" class="nav-link">
                   <i class="nav-icon fas fa-tachometer-alt blue"></i>
                   <p>
-                    Dashboard
+                    Statistics
                  
                   </p>
                 </router-link>
