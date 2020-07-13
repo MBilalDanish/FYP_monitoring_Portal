@@ -19,6 +19,12 @@
                   :disabled="isLoading"
                   @click="getPercent"
                 >Compare with Documents</button>
+                
+                <button
+                  class="btn btn-info"
+                  :disabled="isLoading"
+                  @click="download"
+                >Download</button>
               </div>
             </div>
 
@@ -132,6 +138,22 @@ export default {
     pdf: pdf
   },
   methods: {
+    download() {
+              axios({
+                    url: this.path,
+                    method: 'GET',
+                    responseType: 'blob',
+                }).then((response) => {
+                     var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                     var fileLink = document.createElement('a');
+
+                     fileLink.href = fileURL;
+                     fileLink.setAttribute('download', 'file.pdf');
+                     document.body.appendChild(fileLink);
+
+                     fileLink.click();
+                });
+          },
     checkPercentage1(per) {
       if (per > 0 && per <= 27) return true;
       return false;

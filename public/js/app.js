@@ -4205,6 +4205,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4225,6 +4231,20 @@ __webpack_require__.r(__webpack_exports__);
     pdf: vue_pdf__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
+    download: function download() {
+      axios({
+        url: this.path,
+        method: 'GET',
+        responseType: 'blob'
+      }).then(function (response) {
+        var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+        var fileLink = document.createElement('a');
+        fileLink.href = fileURL;
+        fileLink.setAttribute('download', 'file.pdf');
+        document.body.appendChild(fileLink);
+        fileLink.click();
+      });
+    },
     checkPercentage1: function checkPercentage1(per) {
       if (per > 0 && per <= 27) return true;
       return false;
@@ -83897,6 +83917,16 @@ var render = function() {
                       on: { click: _vm.getPercent }
                     },
                     [_vm._v("Compare with Documents")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-info",
+                      attrs: { disabled: _vm.isLoading },
+                      on: { click: _vm.download }
+                    },
+                    [_vm._v("Download")]
                   )
                 ]
               )

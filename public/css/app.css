@@ -13143,6 +13143,11 @@ a.text-muted:hover {
   background-color: #d5b60a;
 }
 
+.animate:hover {
+  color: #2da1fd !important;
+  transform: scale(1.5);
+}
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
