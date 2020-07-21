@@ -12,4 +12,7 @@ export default class Gate{
         if(this.user.type==='admin'|| this.user.type==='supervisor'|| this.user.type==='external')
         return true;
     }
+    isNotVerified(){
+        return this.user.email_verified_at===null;
+    }
 }

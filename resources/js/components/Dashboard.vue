@@ -1,7 +1,15 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center">
-      
+    <div v-if="$gate.isNotVerified()">
+      <div class="card">
+        <div class="card-header">Email Verification</div>
+        <div class="card-body">
+          <p>Before proceeding, please check your email for a verification link.If you did not receive the email</p>
+          <a href="#" @click="sendEmailLink">click here to request another</a>
+        </div>
+      </div>
+    </div>
+    <div v-if="!$gate.isNotVerified()" class="row justify-content-center">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">Statistics</div>
@@ -19,10 +27,7 @@
                   <div class="icon">
                     <i class="fas fa-file-pdf"></i>
                   </div>
-                  <p  class="small-box-footer">
-                   
-                   
-                  </p>
+                  <p class="small-box-footer"></p>
                 </div>
               </div>
               <!-- ./col -->
@@ -36,10 +41,7 @@
                   <div class="icon">
                     <i class="fas fa-user-graduate"></i>
                   </div>
-                  <p  class="small-box-footer">
-                   
-                   
-                  </p>
+                  <p class="small-box-footer"></p>
                 </div>
               </div>
               <!-- ./col -->
@@ -53,10 +55,7 @@
                   <div class="icon">
                     <i class="fas fa-users-cog"></i>
                   </div>
-                  <p  class="small-box-footer">
-                   
-                   
-                  </p>
+                  <p class="small-box-footer"></p>
                 </div>
               </div>
               <!-- ./col -->
@@ -70,10 +69,7 @@
                   <div class="icon">
                     <i class="fas fa-chalkboard-teacher"></i>
                   </div>
-                  <p  class="small-box-footer">
-                   
-                   
-                  </p>
+                  <p class="small-box-footer"></p>
                 </div>
               </div>
               <!-- ./col -->
@@ -87,8 +83,7 @@
                   <div class="icon">
                     <i class="fas fa-eye"></i>
                   </div>
-                  <p  class="small-box-footer">
-                  </p>
+                  <p class="small-box-footer"></p>
                 </div>
               </div>
               <!-- ./col -->
@@ -100,12 +95,9 @@
                     <p>Pending Request</p>
                   </div>
                   <div class="icon">
-                  <i class="fas fa-user-clock"></i>
+                    <i class="fas fa-user-clock"></i>
                   </div>
-                  <p  class="small-box-footer">
-                   
-                   
-                  </p>
+                  <p class="small-box-footer"></p>
                 </div>
               </div>
               <!-- ./col -->
@@ -125,11 +117,25 @@ export default {
       stats: {}
     };
   },
-  methods: {},
+  methods: {
+    sendEmailLink() {
+      axios
+        .get("api/sendEmailLink")
+        .then(() => {
+          
+          swal.fire("Email Confirmation Link is sent to your Email.", "Verify your account and Refresh the page", "success");
+        })
+        .catch(() => {
+          console.log("Some Problem");
+        });
+    }
+  },
   mounted() {
-    this.$Progress.start();
-    axios.get("api/getStats").then(({ data }) => (this.stats = data.data));
-    this.$Progress.finish();
+    if (!this.$gate.isNotVerified()) {
+      this.$Progress.start();
+      axios.get("api/getStats").then(({ data }) => (this.stats = data.data));
+      this.$Progress.finish();
+    }
   }
 };
 </script>

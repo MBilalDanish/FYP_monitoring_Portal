@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div v-if="!$gate.isNotVerified()">
     <div class="row justify-content-center"  v-if="$gate.isAdmin()">
       <div class="col-md-12">
         <div class="card">
@@ -61,6 +62,16 @@
     <div v-if="!$gate.isAdmin()">
   <NotFound></NotFound>
 </div>
+    </div>
+      <div v-if="$gate.isNotVerified()">
+      <div class="card">
+        <div class="card-header">Email Verification</div>
+        <div class="card-body">
+          <p>Before proceeding, please check your email for a verification link.If you did not receive the email</p>
+          <a href="#" @click="sendEmailLink">click here to request another</a>
+        </div>
+      </div>
+    </div>
   </div>
   
 </template>
@@ -78,6 +89,16 @@ export default {
     };
   },
   methods: {
+    sendEmailLink() {
+      axios
+        .get("api/sendEmailLink")
+        .then(() => {
+           swal.fire("Email Confirmation Link is sent to your Email.", "Verify your account and Refresh the page", "success");
+        })
+        .catch(() => {
+          console.log("Some Problem");
+        });
+    },
     showOrNot() {
       let counter = 0;
       for (var user in this.users.data) {
@@ -148,8 +169,9 @@ export default {
     }
   },
   created() {
+    if (!this.$gate.isNotVerified()) {
     this.loadUsers();
-    Fire.$on("reloadUsers", () => this.loadUsers());
+    Fire.$on("reloadUsers", () => this.loadUsers());}
   },
   mounted() {}
 };

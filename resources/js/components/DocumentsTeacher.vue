@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div v-if="!$gate.isNotVerified()">
     <div class="row justify-content-center" v-if="$gate.isTeacher()">
       <div class="col-md-12">
         <div class="card">
@@ -143,6 +144,16 @@
       </div>
     </div>
     <!--Modal Ended-->
+    </div>
+      <div v-if="$gate.isNotVerified()">
+      <div class="card">
+        <div class="card-header">Email Verification</div>
+        <div class="card-body">
+          <p>Before proceeding, please check your email for a verification link.If you did not receive the email</p>
+          <a href="#" @click="sendEmailLink">click here to request another</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -165,6 +176,17 @@ export default {
   },
   
   methods: {
+    sendEmailLink() {
+      axios
+        .get("api/sendEmailLink")
+        .then(() => {
+          
+           swal.fire("Email Confirmation Link is sent to your Email.", "Verify your account and Refresh the page", "success");
+        })
+        .catch(() => {
+          console.log("Some Problem");
+        });
+    },
     showdoc(d_id){
       document_id=d_id;
       this.$router.push('/singledoc');
@@ -293,9 +315,10 @@ export default {
     }
   },
   created() {
+    if (!this.$gate.isNotVerified()) {
     this.loaddocuments();
     Fire.$on("reloaddocuments", () => this.loaddocuments());
-    
+    }
   },
   mounted() {}
 };

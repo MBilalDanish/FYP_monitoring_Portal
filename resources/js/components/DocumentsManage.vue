@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center "  v-if="$gate.isStudent()">
+    <div v-if="!$gate.isNotVerified()">
+    <div class="row justify-content-center" v-if="$gate.isStudent()">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
@@ -31,7 +32,7 @@
                   <td>{{document.document_type}}</td>
                   <td v-if="document.marks!=1">{{document.marks }}</td>
                   <td class="text-danger font-italic font-weight-bold" v-else>Not awarded yet</td>
-                  <td  v-if="document.feedback!='sample'">{{document.feedback }}</td>
+                  <td v-if="document.feedback!='sample'">{{document.feedback }}</td>
                   <td class="text-danger font-italic font-weight-bold" v-else>Not available</td>
                   <td>
                     <a href="#" @click="editModal(document)">
@@ -50,9 +51,10 @@
         </div>
       </div>
     </div>
-<div v-if="!$gate.isStudent()" >
-  <NotFound></NotFound>
-</div>
+    <div v-if="!$gate.isStudent()">
+      <NotFound></NotFound>
+    </div>
+    
     <!-- Modal -->
     <div
       class="modal fade"
@@ -145,6 +147,16 @@
       </div>
     </div>
     <!--Modal Ended-->
+    </div>
+      <div v-if="$gate.isNotVerified()">
+      <div class="card">
+        <div class="card-header">Email Verification</div>
+        <div class="card-body">
+          <p>Before proceeding, please check your email for a verification link.If you did not receive the email</p>
+          <a href="#" @click="sendEmailLink">click here to request another</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -165,15 +177,26 @@ export default {
     };
   },
   methods: {
-      update(){
-            this.$Progress.start();
+      sendEmailLink() {
+      axios
+        .get("api/sendEmailLink")
+        .then(() => {
+          
+           swal.fire("Email Confirmation Link is sent to your Email.", "Verify your account and Refresh the page", "success");
+        })
+        .catch(() => {
+          console.log("Some Problem");
+        });
+    },
+    update() {
+      this.$Progress.start();
       const udata = new FormData();
       udata.append("file", this.form.file);
       udata.append("document_type", this.form.document_type);
       udata.append("description", this.form.description);
       udata.append("title", this.form.title);
       udata.append("id", this.form.id);
-      udata.append("isupdate", '1');
+      udata.append("isupdate", "1");
       axios
         .post("api/document", udata)
         .then(response => {
@@ -197,7 +220,7 @@ export default {
             title: "Something went Wrong"
           });
         });
-      },
+    },
     create() {
       this.$Progress.start();
       const data = new FormData();
@@ -205,7 +228,7 @@ export default {
       data.append("document_type", this.form.document_type);
       data.append("description", this.form.description);
       data.append("title", this.form.title);
-      data.append("isupdate",'0');
+      data.append("isupdate", "0");
 
       axios
         .post("api/document", data)
@@ -230,13 +253,11 @@ export default {
             title: "Something went Wrong"
           });
         });
-        
-     
     },
     uploadFile(file) {
       if (file == "") return false;
       this.form.file = file.target.files[0];
-     // console.log(this.form.file);
+      // console.log(this.form.file);
       //console.log(e);
       //this.form.file = e.target.files[0];
     },
@@ -289,9 +310,10 @@ export default {
     }
   },
   created() {
+    if (!this.$gate.isNotVerified()) {
     this.loaddocuments();
     Fire.$on("reloaddocuments", () => this.loaddocuments());
-    
+    }
   },
   mounted() {}
 };

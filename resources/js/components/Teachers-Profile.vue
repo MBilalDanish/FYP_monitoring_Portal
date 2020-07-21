@@ -1,6 +1,7 @@
 
 <template>
   <div class="container">
+    <div v-if="!$gate.isNotVerified()">
     <div class="row justify-content-center"  v-if="$gate.isTeacher()">
       <div class="col-md-8">
         <div class="card card-widget widget-user mt-5">
@@ -178,6 +179,16 @@
       <NotFound></NotFound>
     </div>
   </div>
+      <div v-if="$gate.isNotVerified()">
+      <div class="card">
+        <div class="card-header">Email Verification</div>
+        <div class="card-body">
+          <p>Before proceeding, please check your email for a verification link.If you did not receive the email</p>
+          <a href="#" @click="sendEmailLink">click here to request another</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -197,6 +208,17 @@ export default {
     };
   },
   methods: {
+    sendEmailLink() {
+      axios
+        .get("api/sendEmailLink")
+        .then(() => {
+           swal.fire("Email Confirmation Link is sent to your Email.", "Verify your account and Refresh the page", "success");
+          
+        })
+        .catch(() => {
+          console.log("Some Problem");
+        });
+    },
     semesterShow() {
       if (this.form.program != mcs) return true;
       return false;
@@ -246,10 +268,12 @@ export default {
     }
   },
   mounted() {
-    console.log("Component mounted.");
+    
   },
   created() {
+    if (!this.$gate.isNotVerified()) {
     axios.get("api/teacherprofile").then(({ data }) => this.form.fill(data[0]));
+    }
   }
 };
 </script>
