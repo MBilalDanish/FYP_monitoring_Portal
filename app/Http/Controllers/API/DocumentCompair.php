@@ -17,7 +17,7 @@ class DocumentCompair extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware(['auth:api','verified']);
         set_time_limit(3600);
     }
 

@@ -1,7 +1,7 @@
 
 <template>
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center"  v-if="$gate.isTeacher()">
       <div class="col-md-11">
         <div class="card">
           <div class="card-header">
@@ -113,6 +113,9 @@
           <!--Modal Ended-->
         </div>
       </div>
+    </div>
+    <div v-if="!$gate.isTeacher()">
+      <NotFound></NotFound>
     </div>
   </div>
 </template>

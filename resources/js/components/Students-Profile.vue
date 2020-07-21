@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center"  v-if="$gate.isStudent()">
       <div class="col-md-8">
         <div class="card card-widget widget-user mt-5">
           <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -267,6 +267,9 @@
           <!-- /.tab-content -->
         </div>
       </div>
+    </div>
+    <div v-if="!$gate.isStudent()">
+      <NotFound></NotFound>
     </div>
   </div>
 </template>

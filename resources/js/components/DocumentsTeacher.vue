@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" v-if="$gate.isTeacher()">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
@@ -48,7 +48,9 @@
         </div>
       </div>
     </div>
-
+<div  v-if="!$gate.isTeacher()" >
+  <NotFound></NotFound>
+</div>
     <!-- Modal -->
     <div
       class="modal fade"

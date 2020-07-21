@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center"  v-if="$gate.isAdmin()">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
@@ -55,7 +55,9 @@
         </div>
       </div>
     </div>
-
+<div v-if="!$gate.isAdmin()">
+  <NotFound></NotFound>
+</div>
     <!-- Modal -->
     <div
       class="modal fade"
