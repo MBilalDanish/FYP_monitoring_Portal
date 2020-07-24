@@ -35,7 +35,8 @@ let routes = [
     { path: '/pending-requests', component:require('./components/Pending-Requests.vue').default },
     { path: '/documentsmanage', component:require('./components/DocumentsManage.vue').default },
     { path: '/documentsteacher', component:require('./components/DocumentsTeacher.vue').default },
-    { path: '/singledoc', component:require('./components/singleDoc.vue').default }
+    { path: '/singledoc', component:require('./components/singleDoc.vue').default },
+    { path: '/chat', component:require('./components/Chat-Room.vue').default }
   ]
   
 let router = new VueRouter({

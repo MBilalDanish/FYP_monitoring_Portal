@@ -112,13 +112,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
           <li class="nav-item">
             <router-link to='/student-profile' class="nav-link">
-                <i class="fas fa-clock nav-icon orange"></i>
+                <i class="fas fa-user nav-icon aqua"></i>
                 <p>Profile</p>
               </router-link >
           </li>
           <li class="nav-item">
             <router-link to='/documentsmanage' class="nav-link">
-                <i class="fas fa-clock nav-icon orange"></i>
+                <i class="fas fa-book nav-icon orange"></i>
                 <p>Manage Documents</p>
               </router-link >
           </li>
@@ -126,18 +126,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
           @cannot('isStudent')
           <li class="nav-item">
             <router-link to='/teacher-profile' class="nav-link">
-                <i class="fas fa-clock nav-icon orange"></i>
+                <i class="fas fa-user nav-icon aqua"></i>
                 <p>Profile</p>
               </router-link >
           </li>
           <li class="nav-item">
             <router-link to='/documentsteacher' class="nav-link">
-                <i class="fas fa-clock nav-icon orange"></i>
+                <i class="fas fa-book nav-icon orange"></i>
                 <p>Manage Documents</p>
               </router-link >
           </li>
           @endcannot
-          
+          <li class="nav-item">
+            <router-link to='/chat' class="nav-link">
+                <i class="fas fa-comment nav-icon indigo"></i>
+                <p>Chat Room</p>
+              </router-link >
+          </li>
           <li class="nav-item">
             <a  class=" nav-link dropdown-item" href="{{ route('logout') }}"
             onclick="event.preventDefault();
@@ -153,6 +158,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 @csrf
             </form>
           </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
