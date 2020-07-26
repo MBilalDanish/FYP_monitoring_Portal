@@ -45,16 +45,12 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        Message::create([
-            'user_id' => 30,
-            'user_message' => 'This is a sample message for User iwth ID=30',
+        return Message::create([
+            'from' => auth('api')->user()->id,
+            'to'=>$request->chatUser_id,
+            'user_message' => $request->message,
 
         ]);
-      
-      return ['Message'=>'Data Saved'];
-         
-       
-     
     }
 
     /**
@@ -67,7 +63,22 @@ class MessageController extends Controller
     {
         //
     }
+public function getMessages(Request $request, $chatUser_id){
+    $current_id = auth('api')->user()->id;
+    $users = DB::table('messages')->select('*')->where([
+        ['from', '=',$current_id ],
+        ['to', '=', $chatUser_id],
+    ])->orWhere([
+        ['from', '=', $chatUser_id],
+        ['to', '=', $current_id],
+    ])
+    ->get();
 
+return response()->json([
+    'data' => $users,
+]);
+
+}
     /**
      * Show the form for editing the specified resource.
      *

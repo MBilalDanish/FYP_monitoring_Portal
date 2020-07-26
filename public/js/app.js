@@ -1974,23 +1974,85 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      showChat: false,
       chatUsers: {},
-      chatUser_id: ""
+      messages: {},
+      chatUser_id: "",
+      message: ""
     };
+  },
+  methods: {
+    getMessages: function getMessages() {
+      var _this = this;
+
+      axios.get("api/getMessages/" + this.chatUser_id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.messages = data;
+      });
+      this.showChat = true;
+    },
+    sendMessage: function sendMessage() {
+      var _this2 = this;
+
+      if (this.message != "") {
+        var mdata = new FormData();
+        mdata.append("chatUser_id", this.chatUser_id);
+        mdata.append("message", this.message);
+        axios.post("api/message", mdata).then(function (response) {
+          Fire.$emit("reloadmessages");
+          _this2.message = "";
+        });
+      }
+    }
   },
   mounted: function mounted() {
     console.log("Component mounted.");
   },
   created: function created() {
-    var _this = this;
+    var _this3 = this;
 
-    axios.get("api/message").then(function (_ref) {
-      var data = _ref.data;
-      return _this.chatUsers = data;
-    }); //axios.post("api/message");
+    axios.get("api/message").then(function (_ref2) {
+      var data = _ref2.data;
+      return _this3.chatUsers = data;
+    });
+    Fire.$on("reloadmessages", function () {
+      return _this3.getMessages();
+    });
+    setInterval(function () {
+      return _this3.getMessages();
+    }, 2000);
   }
 });
 
@@ -80824,19 +80886,24 @@ var render = function() {
                     ],
                     staticClass: "form-control",
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.chatUser_id = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.chatUser_id = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
+                        function($event) {
+                          return _vm.getMessages()
+                        }
+                      ]
                     }
                   },
                   [
@@ -80863,7 +80930,96 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
-            _vm._v("I'm a Chat Room component.")
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.showChat,
+                    expression: "showChat"
+                  }
+                ]
+              },
+              [
+                _vm._l(_vm.messages.data, function(msg) {
+                  return _c("div", { key: msg.id }, [
+                    msg.from == _vm.chatUser_id
+                      ? _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-6" }, [
+                            _c("p", { staticClass: "rounded bg-primary p-2" }, [
+                              _vm._v(_vm._s(msg.user_message))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-6" })
+                        ])
+                      : _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-6" }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-6" }, [
+                            _c("p", { staticClass: "rounded bg-success p-2" }, [
+                              _vm._v(_vm._s(msg.user_message))
+                            ])
+                          ])
+                        ])
+                  ])
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "border border-success p-1" }, [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.sendMessage($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.message,
+                              expression: "message"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "Type Message here"
+                          },
+                          domProps: { value: _vm.message },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.message = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "btn btn-success",
+                          attrs: {
+                            type: "submit",
+                            name: "submit",
+                            value: "Send"
+                          }
+                        })
+                      ])
+                    ]
+                  )
+                ])
+              ],
+              2
+            )
           ])
         ])
       ])

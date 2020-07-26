@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
+    protected $attributes = [
+        'isSeen' => false,
+     ];
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 'user_message'
+        'from','to', 'user_message'
     ];
 }
