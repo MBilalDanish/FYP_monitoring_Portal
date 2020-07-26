@@ -144,8 +144,8 @@ class DocumentController extends Controller
             DB::table('students_profiles')
                 ->where('user_id', $id)
                 ->update(['documents_uploaded' => true]);
-            // Read file contents...
-            //$contents = file_get_contents($request->file->path());
+          
+   
             return response()->json([
                 'Insert' => 'done',
             ]);

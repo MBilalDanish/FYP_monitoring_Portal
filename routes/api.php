@@ -34,4 +34,4 @@ Route::get('getStats','API\UserController@getStats');
 Route::get('sendEmailLink','API\EmailNewLinkController@verifyEmail');
 Route::apiResources(['message' => 'API\MessageController']);
 Route::get('getMessages/{chatUser_id}','API\MessageController@getMessages');
-//Route::put('documentUpdate/{data}','API\DocumentController@updateDocument');
+
