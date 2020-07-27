@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div class="border border-success p-1">
-                <form @submit.prevent="sendMessage">
+                <form  @submit.prevent="sendMessage">
                   <div class="input-group">
                     <input
                       type="text"

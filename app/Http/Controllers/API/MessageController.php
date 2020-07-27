@@ -16,9 +16,6 @@ class MessageController extends Controller
      */
     public function index()
     {
-
-
-
         $users = DB::table('users')->select('*')
             ->get();
 
@@ -45,9 +42,32 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        return Message::create([
+        $current_id=auth('api')->user()->id;
+        $chatUser_id=$request->chatUser_id;
+        $ids = [];
+      
+        $messages=DB::table('messages')->select('*')->where([
+            ['from', '=', $current_id],
+            ['to', '=', $chatUser_id],
+        ])->orWhere([
+            ['from', '=', $chatUser_id],
+            ['to', '=', $current_id],
+        ])->latest()->get();
+        $deleteUs=DB::table('messages')->select('*')->where([
+            ['from', '=', $current_id],
+            ['to', '=', $chatUser_id],
+        ])->orWhere([
+            ['from', '=', $chatUser_id],
+            ['to', '=', $current_id],
+        ])->latest()->take($messages->count())->skip(10)->get();
+
+        foreach ($deleteUs as $deleteMe) {
+            $ids[] = $deleteMe->id;
+        }
+        Message::destroy($ids);
+        Message::create([
             'from' => auth('api')->user()->id,
-            'to'=>$request->chatUser_id,
+            'to' => $request->chatUser_id,
             'user_message' => $request->message,
 
         ]);
@@ -63,22 +83,24 @@ class MessageController extends Controller
     {
         //
     }
-public function getMessages(Request $request, $chatUser_id){
-    $current_id = auth('api')->user()->id;
-    $users = DB::table('messages')->select('*')->where([
-        ['from', '=',$current_id ],
-        ['to', '=', $chatUser_id],
-    ])->orWhere([
-        ['from', '=', $chatUser_id],
-        ['to', '=', $current_id],
-    ])
-    ->get();
+    public function getMessages(Request $request, $chatUser_id)
+    {
 
-return response()->json([
-    'data' => $users,
-]);
+        $current_id = auth('api')->user()->id;
 
-}
+        $users = DB::table('messages')->select('*')->where([
+            ['from', '=', $current_id],
+            ['to', '=', $chatUser_id],
+        ])->orWhere([
+            ['from', '=', $chatUser_id],
+            ['to', '=', $current_id],
+        ])
+            ->get();
+
+        return response()->json([
+            'data' => $users,
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

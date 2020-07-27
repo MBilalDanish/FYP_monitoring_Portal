@@ -26,6 +26,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.1",
         "admin-lte": "^3.0.0-alpha.2",
+        "bootstrap-material-design": "^4.1.1",
         "sweetalert2": "^9.15.1",
         "vform": "^1.0.1",
         "vue-pdf": "^4.1.0",

@@ -15,6 +15,7 @@ $fa-font-path:        "../webfonts";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "~@fortawesome/fontawesome-free/scss/solid.scss";
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
 
 .router-link-exact-active{
     color:white !important;
@@ -81,4 +82,26 @@ $fa-font-path:        "../webfonts";
 .level4{
   background-color: rgb(206, 16, 16);
   color:rgb(206, 16, 16);
+}
+.bg-theme{
+  background: rgb(23,95,102);
+  background: linear-gradient(59deg, rgba(23,95,102,1) 17%, rgba(35,66,27,1) 100%);
+}
+.text-bright{
+  color: rgb(226, 226, 225) !important;
+}
+.f-input {
+  border-top-style: hidden !important;
+  border-right-style: hidden !important;
+  border-left-style: hidden !important;
+  border-bottom-style: groove !important;
+  border-radius: 0px;
+  border-color: rgb(23,95,102) !important;
+  
+}
+.text-theme1{
+  color: rgb(23,95,102) !important;
+}
+.text-theme2{
+  color:rgba(35,66,27)!important;
 }
