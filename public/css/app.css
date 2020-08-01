@@ -30262,13 +30262,22 @@ readers do not read off random characters that represent icons */
   color: #ce1010;
 }
 
+.not-found {
+  background: url("/images/Not Found.png?9f546b70ef13dc2efebedd9e78c27bef");
+}
+
 .bg-theme {
+  background: #175f66 !important;
+  background: linear-gradient(59deg, #175f66 17%, #23421b 100%) !important;
+}
+
+.bg-theme-light {
   background: #175f66;
-  background: linear-gradient(59deg, #175f66 17%, #23421b 100%);
+  background: linear-gradient(59deg, rgba(7, 35, 37, 0.9) 17%, rgba(16, 32, 11, 0.9) 100%), url(/images/bg-theme-ligh.jpg?b9ba1668e5e8e41e15b0194f13138b3f);
 }
 
 .text-bright {
-  color: #e2e2e1 !important;
+  color: #d4d4ba !important;
 }
 
 .f-input {
@@ -30286,5 +30295,15 @@ readers do not read off random characters that represent icons */
 
 .text-theme2 {
   color: #23421b !important;
+}
+
+.align-left {
+  margin-left: 0px;
+  margin-right: 100%;
+}
+
+.align-right {
+  margin-left: 100%;
+  margin-right: 0px;
 }
 

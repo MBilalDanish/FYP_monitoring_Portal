@@ -3,7 +3,7 @@
     <div v-if="!$gate.isNotVerified()">
     <div class="row justify-content-center"  v-if="$gate.isAdmin()">
       <div class="col-md-12">
-        <div class="card">
+        <div class="card rounded-0">
           <div class="card-header">
             <h3 class="card-title" style="float:left">Teachers</h3>
 
@@ -91,6 +91,7 @@
               <!--input -->
               <div class="form-group">
                 <input
+                readonly
                   v-model="form.email"
                   type="email"
                   placeholder="Email"

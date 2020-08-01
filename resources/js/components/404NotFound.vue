@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-       <h1>404 Not Found</h1>
+<h1 class="text-bright m-5">Not Found</h1>
     </div>
 </template>
 

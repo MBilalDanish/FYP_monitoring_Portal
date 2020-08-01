@@ -4,7 +4,7 @@
     <div v-if="!$gate.isNotVerified()">
     <div class="row justify-content-center"  v-if="$gate.isTeacher()">
       <div class="col-md-11">
-        <div class="card">
+        <div class="card rounded-0">
           <div class="card-header">
             <div style="float:left;">
               <div class="btn-group" role="group" aria-label="Basic example">

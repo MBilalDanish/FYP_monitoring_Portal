@@ -3660,6 +3660,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4099,6 +4100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -80839,7 +80841,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("404 Not Found")])
+      _c("h1", { staticClass: "text-bright m-5" }, [_vm._v("Not Found")])
     ])
   }
 ]
@@ -80867,7 +80869,7 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row justify-content-center" }, [
       _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card rounded-0" }, [
           _c("div", { staticClass: "card-header" }, [
             _c("div", { staticClass: "row justify-content-center" }, [
               _c("div", { staticClass: "col-5" }, [_vm._v("Chat Room")]),
@@ -81051,7 +81053,7 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _vm.$gate.isNotVerified()
       ? _c("div", [
-          _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card rounded-0" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v("Email Verification")
             ]),
@@ -81249,7 +81251,7 @@ var render = function() {
           _vm.$gate.isStudent()
             ? _c("div", { staticClass: "row justify-content-center" }, [
                 _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card rounded-0" }, [
                     _c("div", { staticClass: "card-header" }, [
                       _c(
                         "h3",
@@ -81777,7 +81779,7 @@ var render = function() {
           _vm.$gate.isTeacher()
             ? _c("div", { staticClass: "row justify-content-center" }, [
                 _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card rounded-0" }, [
                     _vm._m(0),
                     _vm._v(" "),
                     _c(
@@ -82294,7 +82296,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "row justify-content-center" }, [
         _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card rounded-0" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v("Example Component")
             ]),
@@ -82337,7 +82339,7 @@ var render = function() {
           _vm.$gate.isAdmin()
             ? _c("div", { staticClass: "row justify-content-center" }, [
                 _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card rounded-0" }, [
                     _vm._m(0),
                     _vm._v(" "),
                     _c(
@@ -82553,7 +82555,9 @@ var render = function() {
                 _c("div", { staticClass: "col-md-8" }, [
                   _c(
                     "div",
-                    { staticClass: "card card-widget widget-user mt-5" },
+                    {
+                      staticClass: "card card-widget widget-user mt-5 rounded-0"
+                    },
                     [
                       _c(
                         "div",
@@ -82597,7 +82601,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "card nav-tabs-custom" }, [
+                  _c("div", { staticClass: "card rounded-0 nav-tabs-custom" }, [
                     _vm._m(0),
                     _vm._v(" "),
                     _c("div", { staticClass: "tab-content" }, [
@@ -82809,6 +82813,7 @@ var render = function() {
                                       "is-invalid": _vm.form.errors.has("email")
                                     },
                                     attrs: {
+                                      readonly: "",
                                       type: "email",
                                       id: "inputEmail",
                                       placeholder: "Email"
@@ -83409,8 +83414,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("ul", { staticClass: "nav nav-tabs card-header" }, [
+    return _c("div", { staticClass: "card-header rounded-0" }, [
+      _c("ul", { staticClass: "nav nav-tabs card-header rounded-0" }, [
         _c("li", { staticClass: "active" }, [
           _c(
             "a",
@@ -83471,7 +83476,7 @@ var render = function() {
           _vm.$gate.isAdmin()
             ? _c("div", { staticClass: "row justify-content-center" }, [
                 _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card rounded-0" }, [
                     _c("div", { staticClass: "card-header" }, [
                       _c(
                         "h3",
@@ -83809,7 +83814,11 @@ var render = function() {
                               class: {
                                 "is-invalid": _vm.form.errors.has("email")
                               },
-                              attrs: { type: "email", placeholder: "Email" },
+                              attrs: {
+                                readonly: "",
+                                type: "email",
+                                placeholder: "Email"
+                              },
                               domProps: { value: _vm.form.email },
                               on: {
                                 input: function($event) {
@@ -84024,7 +84033,9 @@ var render = function() {
                 _c("div", { staticClass: "col-md-8" }, [
                   _c(
                     "div",
-                    { staticClass: "card card-widget widget-user mt-5" },
+                    {
+                      staticClass: "card card-widget widget-user mt-5 rounded-0"
+                    },
                     [
                       _c(
                         "div",
@@ -84216,6 +84227,7 @@ var render = function() {
                                       "is-invalid": _vm.form.errors.has("email")
                                     },
                                     attrs: {
+                                      readonly: "",
                                       type: "email",
                                       id: "inputEmail",
                                       placeholder: "Email"
@@ -84460,7 +84472,7 @@ var render = function() {
     _vm._v(" "),
     _vm.$gate.isNotVerified()
       ? _c("div", [
-          _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card rounded-0" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v("Email Verification")
             ]),
@@ -84550,7 +84562,7 @@ var render = function() {
           _vm.$gate.isAdmin()
             ? _c("div", { staticClass: "row justify-content-center" }, [
                 _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card rounded-0" }, [
                     _c("div", { staticClass: "card-header" }, [
                       _c(
                         "h3",
@@ -84821,7 +84833,11 @@ var render = function() {
                               class: {
                                 "is-invalid": _vm.form.errors.has("email")
                               },
-                              attrs: { type: "email", placeholder: "Email" },
+                              attrs: {
+                                readonly: "",
+                                type: "email",
+                                placeholder: "Email"
+                              },
                               domProps: { value: _vm.form.email },
                               on: {
                                 input: function($event) {
@@ -85101,7 +85117,7 @@ var render = function() {
           _vm.$gate.isTeacher()
             ? _c("div", { staticClass: "row justify-content-center" }, [
                 _c("div", { staticClass: "col-md-11" }, [
-                  _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card rounded-0" }, [
                     _c("div", { staticClass: "card-header" }, [
                       _c("div", { staticStyle: { float: "left" } }, [
                         _c(

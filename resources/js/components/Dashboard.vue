@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div v-if="$gate.isNotVerified()">
-      <div class="card">
+      <div class="card rounded-0">
         <div class="card-header">Email Verification</div>
         <div class="card-body">
           <p>Before proceeding, please check your email for a verification link.If you did not receive the email</p>

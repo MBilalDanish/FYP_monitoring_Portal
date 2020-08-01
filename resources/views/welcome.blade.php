@@ -66,7 +66,7 @@
                     <hr class="divider my-4" />
                 </div>
                 <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5">An automated platform for manage Documents and
+                    <p class="text-white-75 font-weight-light text-bright mb-5">An automated platform to manage Documents and
                         Projects of Students.
                     </p>
 

@@ -4,7 +4,7 @@
     <div v-if="!$gate.isNotVerified()">
     <div class="row justify-content-center"  v-if="$gate.isTeacher()">
       <div class="col-md-8">
-        <div class="card card-widget widget-user mt-5">
+        <div class="card card-widget widget-user mt-5 rounded-0">
           <div
             class="widget-user-header text-white"
             style="background-image:url('./img/profile/cover.jpg');  "
@@ -84,7 +84,7 @@
                   <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                   <div class="col-sm-12">
-                    <input
+                    <input readonly
                       v-model="form.email"
                       type="email"
                       class="form-control"
@@ -180,7 +180,7 @@
     </div>
   </div>
       <div v-if="$gate.isNotVerified()">
-      <div class="card">
+      <div class="card rounded-0">
         <div class="card-header">Email Verification</div>
         <div class="card-body">
           <p>Before proceeding, please check your email for a verification link.If you did not receive the email</p>

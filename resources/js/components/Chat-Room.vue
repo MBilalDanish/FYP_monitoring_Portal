@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card">
+        <div class="card rounded-0">
           <div class="card-header">
             <div class="row justify-content-center">
               <div class="col-5">Chat Room</div>

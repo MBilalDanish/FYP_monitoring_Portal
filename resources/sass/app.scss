@@ -83,12 +83,20 @@ $fa-font-path:        "../webfonts";
   background-color: rgb(206, 16, 16);
   color:rgb(206, 16, 16);
 }
+.not-found{
+background: url(('../img/assets/img/Not Found.png'));
+}
 .bg-theme{
+  background: rgb(23,95,102) !important;
+  background: linear-gradient(59deg, rgba(23,95,102,1) 17%, rgba(35,66,27,1) 100%) !important;
+}
+.bg-theme-light{
   background: rgb(23,95,102);
-  background: linear-gradient(59deg, rgba(23,95,102,1) 17%, rgba(35,66,27,1) 100%);
+  background: linear-gradient(59deg, rgba(7, 35, 37, 0.9) 17%, rgba(16, 32, 11, 0.9) 100%),url('../img/assets/img/bg-theme-ligh.jpg');
+  //background: linear-gradient(59deg, rgba(23,95,102,0.9) 17%, rgba(35,66,27,0.9) 100%);
 }
 .text-bright{
-  color: rgb(226, 226, 225) !important;
+  color: rgb(212, 212, 186) !important;
 }
 .f-input {
   border-top-style: hidden !important;
@@ -104,4 +112,13 @@ $fa-font-path:        "../webfonts";
 }
 .text-theme2{
   color:rgba(35,66,27)!important;
+}
+.align-left{
+  margin-left: 0px;
+  margin-right:100%;
+ 
+}
+.align-right{
+  margin-left: 100%;
+  margin-right:0px;
 }

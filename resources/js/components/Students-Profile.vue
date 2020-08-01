@@ -3,7 +3,7 @@
     <div v-if="!$gate.isNotVerified()">
     <div class="row justify-content-center"  v-if="$gate.isStudent()">
       <div class="col-md-8">
-        <div class="card card-widget widget-user mt-5">
+        <div class="card card-widget widget-user mt-5 rounded-0">
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div
             class="widget-user-header text-white"
@@ -17,9 +17,9 @@
           </div>
         </div>
         <!--Profile Setting-->
-        <div class="card nav-tabs-custom">
-          <div class="card-header">
-            <ul class="nav nav-tabs card-header">
+        <div class="card rounded-0 nav-tabs-custom">
+          <div class="card-header rounded-0">
+            <ul class="nav nav-tabs card-header rounded-0">
               <li class="active">
                 <a
                   class="btn btn-danger"
@@ -100,7 +100,7 @@
                   <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                   <div class="col-sm-12">
-                    <input
+                    <input readonly
                       v-model="form.email"
                       type="email"
                       class="form-control"
