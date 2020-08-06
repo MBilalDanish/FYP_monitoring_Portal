@@ -27,6 +27,7 @@ Route::get('supervisor','API\UserController@supervisors');
 Route::get('teacher','API\UserController@teachers');
 Route::get('student','API\UserController@students');
 Route::get('getdocumentsforteacher','API\DocumentController@getdocumentsforteacher');
+Route::get('getAllDocuments','API\DocumentController@getAllDocuments');
 Route::get('singleDocument/{doc_id}','API\DocumentController@singleDocument');
 Route::post('assignMarks','API\DocumentController@assignMarks');
 Route::apiResources(['docCom' => 'API\DocumentCompair']);

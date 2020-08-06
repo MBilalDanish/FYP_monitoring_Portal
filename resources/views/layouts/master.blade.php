@@ -75,7 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </router-link>
               </li>
               @can('isAdmin')
-                
+              
             
           <li class="nav-item has-treeview ">
               
@@ -123,6 +123,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </router-link >
           </li>
           @endcan
+        
           @cannot('isStudent')
           <li class="nav-item">
             <router-link to='/teacher-profile' class="nav-link">
@@ -133,10 +134,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <li class="nav-item">
             <router-link to='/documentsteacher' class="nav-link">
                 <i class="fas fa-book nav-icon orange"></i>
-                <p>Manage Documents</p>
+                <p>View Documents</p>
               </router-link >
           </li>
           @endcannot
+          @can('isAdminOrExternal')
+          <li class="nav-item">
+            <router-link to='/all-documents' class="nav-link">
+                <i class="fas fa-book nav-icon orange"></i>
+                <p>View All Documents</p>
+              </router-link >
+          </li>
+          @endcan
           <li class="nav-item">
             <router-link to='/chat' class="nav-link">
                 <i class="fas fa-comment nav-icon indigo"></i>

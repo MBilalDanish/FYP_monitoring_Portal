@@ -36,6 +36,22 @@ class DocumentController extends Controller
             'data' => $users,
         ]);
     }
+    public function getAllDocuments()
+    {
+        $this->authorize('isAdminOrExternal');
+       
+        
+
+        $users = DB::table('students_profiles')->select('documents.*', 'students_profiles.rollno', 'users.name', 'students_profiles.semester', 'students_profiles.program')->join('documents', 'students_profiles.user_id', '=', 'documents.student_id')->join('users', 'students_profiles.user_id', '=', 'users.id')->get();
+        /*
+        $users=DB::table('documents')->select( 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa' ,'documents.*')
+        ->rightJoin('students_profiles', 'documents.student_id', '=', 'students_profiles.id')
+        ->where('students_profiles.supervisor_id','=', $id)->orWhere('students_profiles.id','=','documents.student_id')->get();
+*/
+        return response()->json([
+            'data' => $users,
+        ]);
+    }
     public function singleDocument(Request $request, $doc_id)
     {
         //$doc_id = $request->id;

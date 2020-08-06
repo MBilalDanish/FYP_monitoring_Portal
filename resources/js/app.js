@@ -36,7 +36,8 @@ let routes = [
     { path: '/documentsmanage', component:require('./components/DocumentsManage.vue').default },
     { path: '/documentsteacher', component:require('./components/DocumentsTeacher.vue').default },
     { path: '/singledoc', component:require('./components/singleDoc.vue').default },
-    { path: '/chat', component:require('./components/Chat-Room.vue').default }
+    { path: '/chat', component:require('./components/Chat-Room.vue').default },
+    { path: '/all-documents', component:require('./components/all-documents.vue').default }
   ]
   
 let router = new VueRouter({

@@ -125,3 +125,11 @@ background: url(('../img/assets/img/Not Found.png'));
   margin-left: 100%;
   margin-right:0px;
 }
+.text-overflow{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+}
+.text-overflow:hover{
+  overflow: visible;
+}
