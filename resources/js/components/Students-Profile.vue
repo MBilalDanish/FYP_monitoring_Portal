@@ -45,95 +45,94 @@
             <div class="tab-pane" id="settings">
               <form class="form-horizontal">
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputid" class="col-sm-2 control-label">id</label>
+                <div class="form-group row px-3">
+                  <label for="inputid" class="col-md-2 control-label">id</label>
 
-                  <div class="col-sm-12">
+               
                     <input
                       v-model="form.id"
                       type="text"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputid"
                       placeholder="ID"
                       :class="{'is-invalid':form.errors.has('id')}"
                     />
                     <has-error :form="form" field="id"></has-error>
-                  </div>
+              
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+                <div class="form-group row px-3">
+                  <label for="inputName" class="col-md-2 control-label">Name</label>
 
-                  <div class="col-sm-12">
+                
                     <input
                       v-model="form.name"
                       type="text"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputName"
                       placeholder="Name"
                       :class="{'is-invalid':form.errors.has('name')}"
                     />
                     <has-error :form="form" field="name"></has-error>
-                  </div>
+           
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputfathername" class="col-sm-2 control-label">Father Name</label>
+                <div class="form-group row px-3">
+                  <label for="inputfathername" class="col-md-2 control-label">Father Name</label>
 
-                  <div class="col-sm-12">
                     <input
                       v-model="form.fathername"
                       type="text"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputfathername"
                       placeholder="Father Name"
                       :class="{'is-invalid':form.errors.has('fathername')}"
                     />
                     <has-error :form="form" field="fathername"></has-error>
-                  </div>
+              
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                <div class="form-group row px-3">
+                  <label for="inputEmail" class="col-md-2 control-label">Email</label>
 
-                  <div class="col-sm-12">
+             
                     <input readonly
                       v-model="form.email"
                       type="email"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputEmail"
                       placeholder="Email"
                       :class="{'is-invalid':form.errors.has('email')}"
                     />
                     <has-error :form="form" field="email"></has-error>
-                  </div>
+        
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputrollNo" class="col-sm-2 control-label">Roll No</label>
+                <div class="form-group row px-3">
+                  <label for="inputrollNo" class="col-md-2 control-label">Roll No</label>
 
-                  <div class="col-sm-12">
+             
                     <input
                       v-model="form.rollno"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputrollNo"
                       placeholder="Roll No"
                     />
-                  </div>
+           
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group col-sm-6" style="float:left;">
-                  <label for="inputProgram" class="col-sm-4 control-label">Program</label>
-                  <div class="col-sm-12">
+                <div class="form-group row px-3" >
+                  <label for="inputProgram" class="col-sm-2 control-label">Program</label>
+                 
                     <select
                       name="program"
                       id="inputProgram"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       :class="{ 'is-invalid': form.errors.has('program') }"
                       v-model="form.program"
                     >
@@ -145,17 +144,17 @@
                       <option value="bsds">BS Data Structure</option>
                     </select>
                     <has-error :form="form" field="program"></has-error>
-                  </div>
+            
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group col-sm-6" style="float:right;">
-                  <label for="inputProgram" class="col-sm-4 control-label">Semester</label>
-                  <div class="col-sm-12">
+                <div class="form-group row px-3 ">
+                  <label for="inputProgram" class="col-sm-2 control-label">Semester</label>
+             
                     <select
                       name="semester"
                       id="inputSemester"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       :class="{ 'is-invalid': form.errors.has('semester') }"
                       v-model="form.semester"
                     >
@@ -171,19 +170,19 @@
                       </template>
                     </select>
                     <has-error :form="form" field="semester"></has-error>
-                  </div>
+            
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group"  @click="showNotEdit">
-                  <label for="inputsupervisor" class="col-sm-4 control-label">Project Supervisor</label>
+                <div class="form-group row px-3"  @click="showNotEdit">
+                  <label for="inputsupervisor" class="col-sm-2 control-label">Project Supervisor</label>
 
-                  <div class="col-sm-12">
+          
                     <input
                       :disabled="true"
                       v-model="form.supervisor"
                       type="text"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputsupervisor"
                       placeholder="Project Supervisor"
                       v-if="form.supervisor!='' && form.supervisor!='supervisor'"
@@ -193,70 +192,69 @@
                     <input
                       :disabled="true"
                       type="text"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputsupervisor"
                       placeholder="Not assigned yet/Only Admin can Assign Supervisor"
                       v-else
                      
                     />
-                   
-                  </div>
+           
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputcgpa" class="col-sm-2 control-label">CGPA</label>
+                <div class="form-group row px-3">
+                  <label for="inputcgpa" class="col-md-2 control-label">CGPA</label>
 
-                  <div class="col-sm-12">
+            
                     <input
                       v-model="form.cgpa"
                       type="text"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputcgpa"
                       placeholder="CGPA"
                       :class="{'is-invalid':form.errors.has('cgpa')}"
                     />
                     <has-error :form="form" field="cgpa"></has-error>
-                  </div>
+            
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputProfilePhoto" class="col-sm-2 control-label">Profile Photo</label>
+                <div class="form-group row px-3">
+                  <label for="inputProfilePhoto" class="col-md-2 control-label">Profile Photo</label>
 
-                  <div class="col-sm-12">
+        
                     <input
                       @change="updatePhoto"
                       type="file"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputProfilePhoto"
                       :class="{'is-invalid':form.errors.has('photo')}"
                     />
                     <has-error :form="form" field="photo"></has-error>
-                  </div>
+               
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
+                <div class="form-group row px-3">
                   <label
                     for="inputPassword"
-                    class="col-sm-12 control-label"
+                    class="col-sm-2 control-label"
                   >Password (Leave Empty if not changing)</label>
 
-                  <div class="col-sm-12">
+                 
                     <input
                       v-model="form.password"
                       type="password"
-                      class="form-control"
+                      class="form-control f-input col-md-8"
                       id="inputPassword"
                       placeholder="Password"
                       :class="{'is-invalid':form.errors.has('password')}"
                     />
                     <has-error :form="form" field="password"></has-error>
-                  </div>
+                 
                 </div>
                 <!-- Input End-->
-                <div class="form-group">
+                <div class="form-group row px-3">
                   <div class="col-sm-offset-2 col-sm-12">
                     <button @click.prevent="updateInfo" type="submit" class="btn btn-success">Update</button>
                   </div>

@@ -13148,7 +13148,7 @@ a.text-muted:hover {
 }
 
 .animate:hover {
-  color: #2da1fd !important;
+  color: rgba(14, 63, 122, 0.73) !important;
   transform: scale(1.5);
 }
 
@@ -30287,6 +30287,10 @@ readers do not read off random characters that represent icons */
   border-bottom-style: groove !important;
   border-radius: 0px;
   border-color: #175f66 !important;
+}
+
+.text-primarry {
+  color: rgba(48, 167, 52, 0.7);
 }
 
 .text-theme1 {

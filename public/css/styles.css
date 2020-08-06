@@ -6098,7 +6098,8 @@ a.close.disabled {
   background: rgb(45,161,253),linear-gradient(59deg, rgba(45,161,253,0.73) 0%, rgba(55,138,24,0.7) 100%) !important;
 }
 .bg-primaryy {
-  background: linear-gradient(59deg, rgba(45,161,253,0.73) 0%, rgba(55,138,24,0.7) 100%) !important;
+  background: linear-gradient(59deg, rgba(48, 167, 52, 0.7) 0%, rgba(14, 63, 122, 0.73)100%) !important;
+  
 }
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
@@ -10098,7 +10099,7 @@ hr.light {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(59deg, rgba(34,195,39,0.7) 0%, rgba(45,140,253,0.73 )100%),url('../img/assets/img/bg.png');
+  background: linear-gradient(59deg, rgba(88, 233, 92, 0.7) 0%, rgba(37, 98, 172, 0.73)100%),url('../img/assets/img/bg.png');
   
   background-position: center;
   background-repeat: no-repeat;

@@ -7,7 +7,7 @@
           <div class="card-header">
             <h3 class="card-title" style="float:left">Teachers</h3>
 
-            <button class="btn btn-success" style="float:right" @click="newModal">
+            <button class="rounded-0 btn btn-success" style="float:right" @click="newModal">
               Add New
               <i class="fa fa-user-plus fa-fw"></i>
             </button>
@@ -59,53 +59,59 @@
 </div>
     <!-- Modal -->
     <div
-      class="modal fade"
+      class="modal fade "
       id="addNew"
       tabindex="-1"
       role="dialog"
       aria-labelledby="addNewLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+      <div class="modal-dialog  modal-dialog-centered">
+        <div class="rounded-0 modal-content">
           <div class="modal-header">
             <h5 v-show="editmode" class="modal-title" id="addNewLabel">Update User</h5>
             <h5 v-show="!editmode" class="modal-title" id="addNewLabel">Add New User</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class=" rounded-0 bg-warning close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <form @submit.prevent="editmode ? updateTeachers():createTeacher()" >
             <div class="modal-body">
               <!--input -->
-              <div class="form-group">
+              <div class="form-group row " >
+                 <label class="col-md-2 col-form-label text-md-right text-dark"><i class="fas fa-user fa-2x"></i></label>
+                          
                 <input
                   v-model="form.name"
                   type="text"
                   placeholder="Name"
-                  class="form-control"
+                  class="f-input col-md-8  form-control"
                   :class="{ 'is-invalid': form.errors.has('name') }"
                 />
                 <has-error :form="form" field="name"></has-error>
               </div>
               <!--input -->
-              <div class="form-group">
+              <div class="form-group row">
+                 <label class="col-md-2 col-form-label text-md-right text-dark"><i class="fas fa-envelope fa-2x"></i></label>
+                  
                 <input
-                readonly
+                
                   v-model="form.email"
                   type="email"
                   placeholder="Email"
-                  class="form-control"
+                  class="f-input col-md-8 form-control"
                   :class="{ 'is-invalid': form.errors.has('email') }"
                 />
                 <has-error :form="form" field="email"></has-error>
               </div>
               <!--input -->
-              <div class="form-group">
+              <div class="form-group row">
+                 <label class="col-md-2 col-form-label text-md-right text-dark"><i class="fas fa-list-alt fa-2x"></i></label>
+                  
                 <select
                   name="type"
                   id="type"
-                  class="form-control"
+                  class="f-input col-md-8 form-control"
                   :class="{ 'is-invalid': form.errors.has('type') }"
                   v-model="form.type"
                 ><option disabled value="" >Select Teacher type</option>
@@ -116,12 +122,14 @@
                 <has-error :form="form" field="type"></has-error>
               </div>
               <!--input -->
-              <div class="form-group">
+              <div class="form-group row">
+                 <label class="col-md-2 col-form-label text-md-right text-dark"><i class="fas fa-lock fa-2x"></i></label>
+                  
                 <input
                   v-model="form.password"
                   type="password"
                   placeholder="Password"
-                  class="form-control"
+                  class="f-input col-md-8 form-control"
                   :class="{ 'is-invalid': form.errors.has('password') }"
                 />
                 <has-error :form="form" field="password"></has-error>
@@ -129,9 +137,9 @@
             </div>
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-             <button v-show="editmode" type="submit" class="btn btn-success">Update</button>
-              <button v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
+              <button type="button" class="rounded-0 btn btn-danger" data-dismiss="modal">Close</button>
+             <button v-show="editmode" type="  submit" class=" rounded-0 btn btn-success">Update</button>
+              <button v-show="!editmode" type=" submit" class=" rounded-0 btn btn-primary">Create</button>
             </div>
           </form>
         </div>
@@ -140,7 +148,7 @@
     <!--Modal Ended-->
     </div>
       <div v-if="$gate.isNotVerified()">
-      <div class="card">
+      <div class="card rounded-0">
         <div class="card-header">Email Verification</div>
         <div class="card-body">
           <p>Before proceeding, please check your email for a verification link.If you did not receive the email</p>

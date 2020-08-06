@@ -22,7 +22,7 @@
             <ul class="nav nav-tabs card-header">
               <li class="active">
                 <a
-                  class="btn btn-danger"
+                  class="btn rounded-0 btn-danger"
                   href="#activity"
                   data-toggle="tab"
                   aria-expanded="false"
@@ -30,7 +30,7 @@
               </li>
               <li>
                 <a
-                  class="mx-2 btn btn-primary"
+                  class="mx-2 btn rounded-0 btn-primary"
                   href="#settings"
                   data-toggle="tab"
                   aria-expanded="true"
@@ -46,126 +46,128 @@
             <div class="tab-pane" id="settings">
               <form class="form-horizontal">
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputid" class="col-sm-2 control-label">id</label>
+                <div class="form-group row px-3">
+                  <label for="inputid" class="col-md-1  control-label"><i class="fas fa-id-badge fa-2x"></i></label>
 
-                  <div class="col-sm-12">
+                 
                     <input
+                    readonly
                       v-model="form.id"
                       type="text"
-                      class="form-control"
+                      class="form-control f-input col-md-10"
                       id="inputid"
                       placeholder="ID"
                       :class="{'is-invalid':form.errors.has('id')}"
                     />
                     <has-error :form="form" field="id"></has-error>
-                  </div>
+              
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+                <div class="form-group row px-3">
+                  <label for="inputName" class="col-md-1  control-label"><i class="fas fa-user fa-2x"></i></label>
 
-                  <div class="col-sm-12">
+                  
                     <input
                       v-model="form.name"
                       type="text"
-                      class="form-control"
+                      class="form-control f-input col-md-10"
                       id="inputName"
                       placeholder="Name"
                       :class="{'is-invalid':form.errors.has('name')}"
                     />
                     <has-error :form="form" field="name"></has-error>
-                  </div>
+             
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                <div class="form-group row px-3">
+                  <label for="inputEmail" class="col-md-1  control-label"><i class="fas fa-envelope fa-2x"></i></label>
 
-                  <div class="col-sm-12">
+                 
                     <input readonly
                       v-model="form.email"
                       type="email"
-                      class="form-control"
+                      class="form-control f-input col-md-10"
                       id="inputEmail"
                       placeholder="Email"
                       :class="{'is-invalid':form.errors.has('email')}"
                     />
                     <has-error :form="form" field="email"></has-error>
-                  </div>
+                
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputdesignation" class="col-sm-2 control-label">Designation</label>
+                <div class="form-group row px-3">
+                  <label for="inputdesignation" class="col-md-1  control-label"><i class="fas fa-chalkboard-teacher fa-2x"></i></label>
 
-                  <div class="col-sm-12">
+               
                     <input
                       v-model="form.designation"
-                      class="form-control"
+                      class="form-control f-input col-md-10"
                       id="inputdesignation"
                       placeholder="Designation"
                     />
-                  </div>
+                
                 </div>
                 <!-- Input End-->
 
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputsupervisor" class="col-sm-2 control-label">Contact No</label>
+                <div class="form-group row px-3">
+                  <label for="inputsupervisor" class="col-md-1  control-label"><i class="fas fa-phone fa-2x"></i></label>
 
-                  <div class="col-sm-12">
+                  
                     <input
                       v-model="form.contact"
                       type="text"
-                      class="form-control"
+                      class="form-control f-input col-md-10"
                       id="inputphone"
                       placeholder="Contact No"
                       :class="{'is-invalid':form.errors.has('phone')}"
                     />
                     <has-error :form="form" field="phone"></has-error>
-                  </div>
+                 
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
-                  <label for="inputProfilePhoto" class="col-sm-2 control-label">Profile Photo</label>
+                <div class="form-group row px-3">
+                  <label for="inputProfilePhoto" class="col-md-1  control-label"><i class="fas fa-image fa-2x"></i></label>
 
-                  <div class="col-sm-12">
+                  
                     <input
                       @change="updatePhoto"
                       type="file"
-                      class="form-control"
+                      class="form-control f-input col-md-10"
                       id="inputProfilePhoto"
                     />
-                  </div>
+                 
                 </div>
                 <!-- Input End-->
                 <!-- Input Start-->
-                <div class="form-group">
+                <div class="form-group row px-3">
                   <label
                     for="inputPassword"
-                    class="col-sm-12 control-label"
-                  >Password (Leave Empty if not changing)</label>
+                    class="col-md-1 control-label"
+                  ><i class="fas fa-lock fa-2x"></i></label>
 
-                  <div class="col-sm-12">
+                
                     <input
                       v-model="form.password"
                       type="password"
-                      class="form-control"
+                      class="form-control f-input col-md-10"
                       id="inputPassword"
                       placeholder="Password"
                       :class="{'is-invalid':form.errors.has('password')}"
                     />
                     <has-error :form="form" field="password"></has-error>
-                  </div>
+                 
                 </div>
                 <!-- Input End-->
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-12">
-                    <button @click.prevent="updateInfo" type="submit" class="btn btn-success">Update</button>
-                  </div>
+                <div class="form-group row px-3">
+                  <div class=" col-md-9">
+                    </div>
+                    <button @click.prevent="updateInfo" type="submit" class="col-md-2 btn rounded-0 btn-success">Update</button>
+                  
                 </div>
               </form>
             </div>
