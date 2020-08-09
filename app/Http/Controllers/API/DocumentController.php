@@ -220,11 +220,16 @@ public function updateDocument(Request $request,$data){
     public function destroy($id)
     {
         $this->authorize('isStudent');
-        // $user = User::findOrFail($id);
-        //$user->delete();
+        $currentFile = DB::table('documents')->select('file')->where('id', '=', $id)->first();
+        $filetodelete = storage_path('app/public/docs/') . $currentFile->file;
+                if (file_exists($filetodelete)) {
+                    @unlink($filetodelete);
+                }
         DB::table('documents')->where('id', '=', $id)->delete();
-        return ['message' => 'User Deleted'];
+        return ['message' => 'Document Deleted'];
     }
+
+
     public function assignMarks(Request $request){
         if($request->exists('marks')){
             DB::table('documents')->where('id','=',$request->d_id)->update(['marks'=>$request->marks]);
