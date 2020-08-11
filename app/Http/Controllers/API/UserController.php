@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth:api','verified']);
+        $this->middleware(['auth:api', 'verified']);
     }
 
 
@@ -433,23 +433,35 @@ class UserController extends Controller
 
         $this->authorize('isAdmin');
         $user = User::findOrFail($id);
-        if($user->type=="student"){
+        if($user->type=="admin")
+        {
+            if($user->designation=="chairman"){
+                $returnData = array(
+                    'status' => 'error',
+                    'message' => 'Action is unauthorized'
+                );
+                return response()->json([
+                    'data' => $returnData,  
+                ],403);
+             
+            }
+        }
+        if ($user->type == "student") {
             $currentFiles = DB::table('documents')->select('file')->where('student_id', '=', $id)->get();
-            for($i=0;$i<$currentFiles->count();$i++){
+            for ($i = 0; $i < $currentFiles->count(); $i++) {
                 $filetodelete = storage_path('app/public/docs/') . $currentFiles[$i]->file;
                 if (file_exists($filetodelete)) {
                     @unlink($filetodelete);
                 }
             }
-             DB::table('documents')->where('student_id', '=', $id)->delete();
-             DB::table('students_profiles')->where('user_id', '=', $id)->delete();
-        }
-        else
-        {
+            DB::transaction(function () use ($id) {
+                DB::table('documents')->where('student_id', '=', $id)->delete();
+                DB::table('students_profiles')->where('user_id', '=', $id)->delete();
+            });
+        } else {
             DB::table('teachers_profiles')->where('user_id', '=', $id)->delete();
         }
         $user->delete();
         return ['message' => 'User Deleted'];
     }
-    
 }
