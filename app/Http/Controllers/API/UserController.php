@@ -62,7 +62,7 @@ class UserController extends Controller
     {
         $this->authorize('isAdmin');
         //$result =User::latest()->paginate(20);'users.*', 'fathername', 'rollno', 'program', 'semester', 'supervisor', 'cgpa', 'photo','designation', 'contact'
-        $users = DB::table('users')->select('users.id', 'users.name', 'users.type', 'users.email', 'users.isapproved', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo as pic', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo')
+        $users = DB::table('users')->select('users.id', 'users.name', 'users.type', 'users.email', 'users.isapproved', 'students_profiles.fathername', 'students_profiles.rollno', 'students_profiles.program', 'students_profiles.semester', 'students_profiles.supervisor', 'students_profiles.cgpa', 'students_profiles.photo as pic', 'teachers_profiles.designation', 'teachers_profiles.contact', 'teachers_profiles.photo', 'students_profiles.supervisor_id as s_id')
             ->leftJoin('teachers_profiles', 'users.id', '=', 'teachers_profiles.user_id')
             ->join('students_profiles', 'users.id', '=', 'students_profiles.user_id')
             ->get();
@@ -430,20 +430,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
         $this->authorize('isAdmin');
         $user = User::findOrFail($id);
-        if($user->type=="admin")
-        {
-            if($user->designation=="chairman"){
+        if ($user->type == "admin") {
+            if ($user->designation == "sa" || $user->designation == "SA" || $user->designation == "sA" || $user->designation == "Sa" ) {
                 $returnData = array(
                     'status' => 'error',
                     'message' => 'Action is unauthorized'
                 );
                 return response()->json([
-                    'data' => $returnData,  
-                ],403);
-             
+                    'data' => $returnData,
+                ], 403);
             }
         }
         if ($user->type == "student") {
@@ -454,12 +451,24 @@ class UserController extends Controller
                     @unlink($filetodelete);
                 }
             }
+            $result =  DB::table('students_profiles')
+                ->select('*')->where('user_id', '=', $id)
+                ->first();
+            $currentPhoto = $result->photo;
             DB::transaction(function () use ($id) {
                 DB::table('documents')->where('student_id', '=', $id)->delete();
                 DB::table('students_profiles')->where('user_id', '=', $id)->delete();
             });
         } else {
+            $result =  DB::table('teachers_profiles')
+                ->select('*')->where('user_id', '=', $id)
+                ->first();
+            $currentPhoto = $result->photo;
             DB::table('teachers_profiles')->where('user_id', '=', $id)->delete();
+        }
+        $userPhoto = public_path('img/profile/') . $currentPhoto;
+        if (file_exists($userPhoto)) {
+            @unlink($userPhoto);
         }
         $user->delete();
         return ['message' => 'User Deleted'];

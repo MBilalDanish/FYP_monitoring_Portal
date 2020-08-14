@@ -30274,6 +30274,7 @@ readers do not read off random characters that represent icons */
 .bg-theme-light {
   background: #175f66;
   background: linear-gradient(59deg, rgba(7, 35, 37, 0.9) 17%, rgba(16, 32, 11, 0.9) 100%), url(/images/bg-theme-ligh.jpg?b9ba1668e5e8e41e15b0194f13138b3f);
+  background-repeat: no-repeat;
 }
 
 .text-bright {

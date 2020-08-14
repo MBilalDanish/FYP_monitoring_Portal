@@ -239,7 +239,7 @@
                   <label
                     for="inputPassword"
                     class="col-sm-2 control-label"
-                  >Password (Leave Empty if not changing)</label>
+                  >Password </label>
 
                  
                     <input
@@ -247,7 +247,7 @@
                       type="password"
                       class="form-control f-input col-md-8"
                       id="inputPassword"
-                      placeholder="Password"
+                      placeholder="Leave Empty if not changing"
                       :class="{'is-invalid':form.errors.has('password')}"
                     />
                     <has-error :form="form" field="password"></has-error>

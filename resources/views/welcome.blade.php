@@ -19,6 +19,7 @@
     <!--Style-->
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/styles.css">
+ 
 </head>
 
 <body id="page-top">
@@ -97,7 +98,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="mt-5">
-                        <i class="fas animate fa-4x fa-gem text-primary mb-4"></i>
+                        <i  class="fas animate fa-4x fa-gem text-primary mb-4"></i>
                         <h3 class="h4 mb-2">Sturdy Themes</h3>
                         <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
                     </div>
@@ -224,6 +225,7 @@
     <script src="/js/app.js"></script>
 
     <script src="/js/scripts.js"></script>
+  
 </body>
 
 </html>

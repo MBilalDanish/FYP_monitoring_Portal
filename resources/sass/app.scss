@@ -93,6 +93,7 @@ background: url(('../img/assets/img/Not Found.png'));
 .bg-theme-light{
   background: rgb(23,95,102);
   background: linear-gradient(59deg, rgba(7, 35, 37, 0.9) 17%, rgba(16, 32, 11, 0.9) 100%),url('../img/assets/img/bg-theme-ligh.jpg');
+  background-repeat: no-repeat;
   //background: linear-gradient(59deg, rgba(23,95,102,0.9) 17%, rgba(35,66,27,0.9) 100%);
 }
 .text-bright{

@@ -57,14 +57,14 @@
     
     <!-- Modal -->
     <div
-      class="modal fade"
+      class="modal fade rounded-0"
       id="addNew"
       tabindex="-1"
       role="dialog"
       aria-labelledby="addNewLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered rounded-0">
         <div class="modal-content">
           <div class="modal-header">
             <h5 v-show="editmode" class="modal-title" id="addNewLabel">Update Document</h5>

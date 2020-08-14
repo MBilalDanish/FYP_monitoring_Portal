@@ -35,16 +35,16 @@
                   </div>
                 </div>
               </div>
-              <div class="border border-success p-1">
+              <div class=" p-1">
                 <form  @submit.prevent="sendMessage">
                   <div class="input-group">
                     <input
                       type="text"
-                      class="form-control"
+                      class="rounded-0 border border-dark  form-control"
                       v-model="message"
                       placeholder="Type Message here"
                     />
-                    <input type="submit" class="btn btn-success" name="submit" value="Send" />
+                    <input type="submit" class="rounded-0 btn btn-success" name="submit" value="Send" />
                   </div>
                 </form>
               </div>
