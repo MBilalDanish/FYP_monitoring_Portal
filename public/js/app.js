@@ -84960,7 +84960,9 @@ var render = function() {
                                   { key: teacher.id },
                                   [
                                     teacher.type != "student" &&
-                                    teacher.isapproved == 1
+                                    teacher.isapproved == 1 &&
+                                    teacher.name != "chairman" &&
+                                    teacher.name != "Chairman"
                                       ? [
                                           _c("td", [
                                             _vm._v(_vm._s(teacher.id))

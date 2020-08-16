@@ -25,7 +25,7 @@
                   <th>Modify</th>
                 </tr>
                 <tr v-for="teacher in teachers.data" :key="teacher.id">
-                  <template v-if="teacher.type!='student' && teacher.isapproved==1">
+                  <template v-if="teacher.type!='student' && teacher.isapproved==1 && teacher.name!='chairman'&& teacher.name!='Chairman'">
                     
                   
                   <td>{{teacher.id }}</td>

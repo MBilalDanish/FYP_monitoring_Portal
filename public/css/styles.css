@@ -10056,6 +10056,8 @@ hr.light {
 }
 #mainNav .navbar-nav .nav-item .nav-link.active {
   color: #378a18 !important;
+  text-decoration: underline;
+  transform: scale(1.2);
 }
 @media (min-width: 992px) {
   #mainNav {

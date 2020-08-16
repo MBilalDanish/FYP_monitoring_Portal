@@ -82,9 +82,9 @@
                 <div class="col-lg-8 text-center">
                     <h2 class="text-white mt-0">We've got what you need!</h2>
                     <hr class="divider light my-4" />
-                    <p class="text-white-50 mb-4">Start Bootstrap has everything you need to get your new website up and
-                        running in no time! Choose one of our open source, free to download, and easy to use themes! No
-                        strings attached!</p>
+                    <p class="text-white-50 mb-4">Final Year Project Monitoring System is a web-based solution developed for Universities
+                        which automates tasks of Final Year Projects. FYP monitoring System manages all the
+                        processes involved in Final year projects and also keep repository of all projects.</p>
 
                 </div>
             </div>
@@ -93,36 +93,44 @@
     <!-- Services-->
     <section class="page-section" id="services">
         <div class="container">
-            <h2 class="text-center mt-0">At Your Service</h2>
+            <h2 class="text-center mt-0"></h2>
             <hr class="divider my-4" />
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="mt-5">
-                        <i  class="fas animate fa-4x fa-gem text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Sturdy Themes</h3>
-                        <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
-                    </div>
+                        <a  data-toggle="modal" data-target="#adminModal">
+                            <i  class="fas animate fa-4x fa-users-cog text-primary mb-4"></i>
+                        </a>   
+                        <h3 class="h4 mb-2">Admin</h3>
+                         </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="mt-5">
-                        <i class="fas animate fa-4x fa-laptop-code text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Up to Date</h3>
-                        <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
-                    </div>
+                        <a  data-toggle="modal" data-target="#supervisorModal">
+                            <i class="fas animate fa-4x fa-chalkboard-teacher text-primary mb-4"></i>
+                        </a>  
+                      
+                        <h3 class="h4 mb-2">Supervisor</h3>
+                            </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="mt-5">
-                        <i class="fas animate fa-4x fa-globe text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Ready to Publish</h3>
-                        <p class="text-muted mb-0">You can use this design as is, or you can make changes!</p>
-                    </div>
+
+                        <a  data-toggle="modal" data-target="#externalModal">
+                            <i class="fas animate fa-4x fa-user-check text-primary mb-4"></i>
+                        </a>  
+                    
+                        <h3 class="h4 mb-2">External Examiner</h3>
+                          </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="mt-5">
-                        <i class="fas animate fa-4x fa-heart text-primary mb-4"></i>
-                        <h3 class="h4 mb-2">Made with Love</h3>
-                        <p class="text-muted mb-0">Is it really open source if it's not made with love?</p>
-                    </div>
+                        <a  data-toggle="modal" data-target="#studentsModal">
+                            <i class="fas animate fa-4x fa-user-graduate text-primary mb-4"></i>
+                        </a>  
+                        
+                        <h3 class="h4 mb-2">Students</h3>
+                             </div>
                 </div>
             </div>
         </div>
@@ -135,8 +143,8 @@
                     <a class="portfolio-box" href="/img/assets/img/portfolio/fullsize/1.jpg">
                         <img class="img-fluid" src="/img/assets/img/portfolio/thumbnails/1.jpg" alt="" />
                         <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Category</div>
-                            <div class="project-name">Project Name</div>
+                            <div class="project-category text-white-50">Project No 1</div>
+                            <div class="project-name">MIT Cheetah</div>
                         </div>
                     </a>
                 </div>
@@ -144,8 +152,8 @@
                     <a class="portfolio-box" href="/img/assets/img/portfolio/fullsize/2.jpg">
                         <img class="img-fluid" src="/img/assets/img/portfolio/thumbnails/2.jpg" alt="" />
                         <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Category</div>
-                            <div class="project-name">Project Name</div>
+                            <div class="project-category text-white-50">Project No 2</div>
+                            <div class="project-name">Data Science</div>
                         </div>
                     </a>
                 </div>
@@ -153,8 +161,8 @@
                     <a class="portfolio-box" href="/img/assets/img/portfolio/fullsize/3.jpg">
                         <img class="img-fluid" src="/img/assets/img/portfolio/thumbnails/3.jpg" alt="" />
                         <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Category</div>
-                            <div class="project-name">Project Name</div>
+                            <div class="project-category text-white-50">Project No 3</div>
+                            <div class="project-name">Website</div>
                         </div>
                     </a>
                 </div>
@@ -162,8 +170,8 @@
                     <a class="portfolio-box" href="/img/assets/img/portfolio/fullsize/4.jpg">
                         <img class="img-fluid" src="/img/assets/img/portfolio/thumbnails/4.jpg" alt="" />
                         <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Category</div>
-                            <div class="project-name">Project Name</div>
+                            <div class="project-category text-white-50">Project No 4</div>
+                            <div class="project-name">Java Applicstion</div>
                         </div>
                     </a>
                 </div>
@@ -171,8 +179,8 @@
                     <a class="portfolio-box" href="/img/assets/img/portfolio/fullsize/5.jpg">
                         <img class="img-fluid" src="/img/assets/img/portfolio/thumbnails/5.jpg" alt="" />
                         <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">Category</div>
-                            <div class="project-name">Project Name</div>
+                            <div class="project-category text-white-50">Project No 5</div>
+                            <div class="project-name">Client Server Application</div>
                         </div>
                     </a>
                 </div>
@@ -180,8 +188,8 @@
                     <a class="portfolio-box" href="/img/assets/img/portfolio/fullsize/6.jpg">
                         <img class="img-fluid" src="/img/assets/img/portfolio/thumbnails/6.jpg" alt="" />
                         <div class="portfolio-box-caption p-3">
-                            <div class="project-category text-white-50">Category</div>
-                            <div class="project-name">Project Name</div>
+                            <div class="project-category text-white-50">Project No 6</div>
+                            <div class="project-name">FYP Mpnitoring Portal</div>
                         </div>
                     </a>
                 </div>
@@ -196,21 +204,104 @@
                 <div class="col-lg-8 text-center">
                     <h2 class="mt-0">Let's Get In Touch!</h2>
                     <hr class="divider my-4" />
-                    <p class="text-muted mb-5">Ready to start your next project with us? Give us a call or send us an
+                    <p class="text-muted mb-5">Do You have any Query? Give us a call or send us an
                         email and we will get back to you as soon as possible!</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
                     <i class="fas fa-phone animate fa-3x mb-3 text-primary"></i>
-                    <div>+1 (555) 123-4567</div>
+                    <div>+92306-2612 585</div>
                 </div>
                 <div class="col-lg-4 mr-auto text-center">
                     <i class="fas fa-envelope animate fa-3x mb-3 text-primary"></i><a class="d-block"
-                        href="contact@yourwebsite.com">contact@yourwebsite.com</a>
+                        href="contact@yourwebsite.com">mbilaldanish786@.gmailcom</a>
                 </div>
             </div>
         </div>
+
+
+        <!--//////////////////////////////////////////////////////////////////////////////////////-->
+        <!-- Modal -->
+<div class="modal fade " id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+      <div class="modal-content  rounded-0">
+        <div class="modal-header">
+          <h5 class="modal-title" id="adminModalLabel">Admin User Manual</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          This is for Admin
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success  rounded-0" data-dismiss="modal">Close</button>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+<div class="modal fade rounded-0" id="supervisorModal" tabindex="-1" role="dialog" aria-labelledby="supervisorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content   rounded-0">
+        <div class="modal-header">
+          <h5 class="modal-title" id="supervisorModalLabel">Supervisor User Manual</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+      This is for Supervisor
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success   rounded-0" data-dismiss="modal">Close</button>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+<div class="modal fade rounded-0" id="externalModal" tabindex="-1" role="dialog" aria-labelledby="externalModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content   rounded-0">
+        <div class="modal-header">
+          <h5 class="modal-title" id="externalModalLabel">External Examiner User Manual</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+   This is for External Examiner
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success    rounded-0"  data-dismiss="modal">Close</button>
+ 
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+<div class="modal fade rounded-0" id="studentsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content   rounded-0">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Students User Manual</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+This is for Students
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success    rounded-0" data-dismiss="modal">Close</button>
+        
+        </div>
+      </div>
+    </div>
+  </div>
     </section>
     <!-- Footer-->
     <footer class="bg-light py-5">
