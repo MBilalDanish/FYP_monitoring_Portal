@@ -233,7 +233,14 @@
           </button>
         </div>
         <div class="modal-body">
-          This is for Admin
+            <ol >
+                <li><strong>User Management:</strong>Admin can Add, Delete, Update Users from Management under Control Panel in Admin Dashboard</li>
+                <li><strong>Chat:</strong>Open chat room ,select User, Type Message and send</li>
+                <li><strong>Manage Document:</strong>Open View Documents and Select Document and Compare, Delete, Update and view Documents</li>
+                <li><strong>Manage All Document:</strong>Open View all Documents and Select Document and Compare, Delete, Update and view Documents</li>
+                <li><strong>Edit Profile:</strong>Open Edit Profile under control panel and Fill all Feilds and submit </li>
+                <li><strong>Recover Password:</strong>Open Login Form,Click on Forgot Password, Enter Email, Recover Password using reset Password Link which will be received in Email Inbox </li>
+            </ol>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success  rounded-0" data-dismiss="modal">Close</button>
@@ -253,7 +260,12 @@
           </button>
         </div>
         <div class="modal-body">
-      This is for Supervisor
+            <ol >
+                <li><strong>Chat:</strong>Open chat room ,select User, Type Message and send</li>
+                <li><strong>Manage Document:</strong>Open View Documents and Select Document and Compare, Delete, Update and view Documents</li>
+                <li><strong>Edit Profile:</strong>Open Edit Profile under control panel and Fill all Feilds and submit </li>
+                <li><strong>Recover Password:</strong>Open Login Form,Click on Forgot Password, Enter Email, Recover Password using reset Password Link which will be received in Email Inbox </li>
+            </ol>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success   rounded-0" data-dismiss="modal">Close</button>
@@ -273,7 +285,14 @@
           </button>
         </div>
         <div class="modal-body">
-   This is for External Examiner
+            <ol >
+               <li><strong>Chat:</strong>Open chat room ,select User, Type Message and send</li>
+                <li><strong>Manage Document:</strong>Open View Documents and Select Document and Compare, Delete, Update and view Documents</li>
+                <li><strong>Manage All Document:</strong>Open View all Documents and Select Document and Compare, Delete, Update and view Documents</li>
+                <li><strong>Edit Profile:</strong>Open Edit Profile under control panel and Fill all Feilds and submit </li>
+                <li><strong>Recover Password:</strong>Open Login Form,Click on Forgot Password, Enter Email, Recover Password using reset Password Link which will be received in Email Inbox </li>
+            </ol>
+            
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success    rounded-0"  data-dismiss="modal">Close</button>
@@ -293,7 +312,12 @@
           </button>
         </div>
         <div class="modal-body">
-This is for Students
+            <ol >
+                 <li><strong>Chat:</strong>Open chat room ,select User, Type Message and send</li>
+                <li><strong>Manage Document:</strong>Open Manage Documents and You can update, Delete, Add Documents over there</li>
+               <li><strong>Edit Profile:</strong>Open Edit Profile under control panel and Fill all Feilds and submit </li>
+                <li><strong>Recover Password:</strong>Open Login Form,Click on Forgot Password, Enter Email, Recover Password using reset Password Link which will be received in Email Inbox </li>
+            </ol>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success    rounded-0" data-dismiss="modal">Close</button>

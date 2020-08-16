@@ -69,6 +69,7 @@
 
                   
                     <input
+                    required
                       v-model="form.name"
                       type="text"
                       class="form-control f-input col-md-10"
@@ -86,6 +87,7 @@
 
                  
                     <input readonly
+                    required
                       v-model="form.email"
                       type="email"
                       class="form-control f-input col-md-10"
@@ -104,6 +106,7 @@
                
                     <input
                       v-model="form.designation"
+                      required
                       class="form-control f-input col-md-10"
                       id="inputdesignation"
                       placeholder="Designation"
@@ -123,6 +126,7 @@
                       class="form-control f-input col-md-10"
                       id="inputphone"
                       placeholder="Contact No"
+                      required
                       :class="{'is-invalid':form.errors.has('phone')}"
                     />
                     <has-error :form="form" field="phone"></has-error>
